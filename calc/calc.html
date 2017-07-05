@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset = "utf-8">
+  <title>Калькулятор</title>
+  <link rel = "stylesheet" href = "style.css">
+  <script>
+    var result = 0, operation, custNum, r = 0, r2 = 0;
+    var arrNum = [];
+    function num(custNum) {
+      var x = arrNum.indexOf('.') // нет . -> x=-1
+      if (custNum == '.') {
+        if (x == -1)
+          arrNum.push(custNum);
+      } else
+        arrNum.push(custNum);
+      r = parseFloat(arrNum.join(''));
+      document.getElementById('result').setAttribute("value", arrNum.join(''));
+    }
+
+    function operat(custOperation) {
+      operation = custOperation;
+      r2 = r;
+      r = 0;
+      arrNum = [];
+    }
+
+    function res() {
+      if (r != 0 && r2 != 0) {
+        if (operation == "plus")
+          result = r2 + r;
+        else if (operation == "minus")
+          result = r2 - r;
+        else if (operation == "mult")
+          result = r2 * r;
+        else if (operation == "divis")
+          result = r2 / r;
+        document.getElementById('result').setAttribute("value", result);
+      }
+    }
+
+    function reset() {
+      arrNum.length = 0;
+      r = 0;
+      r2 = 0;
+      document.getElementById('result').setAttribute("value", r);
+    }
+
+    function Invers() {
+      r = r * -1;
+      document.getElementById('result').setAttribute("value", r);
+    }
+  </script>
+</head>
+<body>
+<div id = "content">
+  <div id = "header">
+    <a href = "index.html">Главная</a>
+  </div>
+  <h1>Простой калькулятор</h1>
+  <div id = "calc">
+    <input class = "result" type = "text" value = "0" readonly id = "result"/>
+    <br>
+    <br>
+    <div>
+      <input class = "button" type = "button" value = "7" onClick = "num(7)"/>
+      <input class = "button" type = "button" value = "8" onClick = "num(8)"/>
+      <input class = "button" type = "button" value = "9" onClick = "num(9)"/>
+      <input class = "button" type = "button" value = "+" onClick = "operat('plus')"/>
+    </div>
+    <div>
+      <input class = "button" type = "button" value = "4" onClick = "num(4)"/>
+      <input class = "button" type = "button" value = "5" onClick = "num(5)"/>
+      <input class = "button" type = "button" value = "6" onClick = "num(6)"/>
+      <input class = "button" type = "button" value = "-" onClick = "operat('minus')"/>
+    </div>
+    <div>
+      <input class = "button" type = "button" value = "1" onClick = "num(1)"/>
+      <input class = "button" type = "button" value = "2" onClick = "num(2)"/>
+      <input class = "button" type = "button" value = "3" onClick = "num(3)"/>
+      <input class = "button" type = "button" value = "*" onClick = "operat('mult')"/>
+    </div>
+    <div>
+      <input class = "button" type = "button" value = "+/-" onClick = "Invers()"/>
+      <input class = "button" type = "button" value = "0" onClick = "num(0)"/>
+      <input class = "button" type = "button" value = "." onClick = "num('.')"/>
+      <input class = "button" type = "button" value = "/" onClick = "operat('divis')"/>
+    </div>
+    <div>
+      <input class = "buttonBottom" type = "button" value = "C" onClick = "reset()"/>
+      <input class = "buttonBottom" type = "button" value = "=" onClick = "res()"/>
+    </div>
+  </div>
+</div>
+<div id = "footer">Copyright &copy; 2017</div>
+</body>
+</html>
