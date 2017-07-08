@@ -46,21 +46,23 @@ points.reduce(function (prev, elem, i) {
   return prev = elem;
 });
 
-//var arr = [1, 2, 3, 4, 5]
-//
-//var result = arr.reduce(function(sum, current) {
-//  return sum + current;
-//}, 0);
+console.log('Студент набравший максимальный балл: ' + students[maxPointIn] + ' (' + points[maxPointIn] + ' баллов)');
 
+// Task #4
 
+function changePoints(name, count) {
+  students.map(function (names, i) {
+    if(names == name ) {
+      points[i] += count;
+    }
+  });
 
+}
+changePoints('Ирина Овчинникова', 30);
+changePoints('Александр Малов', 30);
 
-
-
-
-
-
-
+console.log(students);
+console.log(points);
 
 
 
