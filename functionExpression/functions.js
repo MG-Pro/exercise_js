@@ -35,36 +35,64 @@ points = studentsAndPoints.filter(function (number, i) {
 
 // Task #3
 
-var maxPointIn;
-var max = 0;
-points.reduce(function (prev, elem, i) {
-
-  if(max < elem) {
-    maxPointIn = i;
-    max = elem
-  }
-  return prev = elem;
-});
-
-console.log('Студент набравший максимальный балл: ' + students[maxPointIn] + ' (' + points[maxPointIn] + ' баллов)');
+//var maxPointIn;
+//var max = 0;
+//points.reduce(function (prev, elem, i) {
+//
+//  if(max < elem) {
+//    maxPointIn = i;
+//    max = elem
+//  }
+//  return prev = elem;
+//});
+//
+//console.log('Студент набравший максимальный балл: ' + students[maxPointIn] + ' (' + points[maxPointIn] + ' баллов)');
 
 // Task #4
 
-function changePoints(name, count) {
-  students.map(function (names, i) {
-    if(names == name ) {
-      points[i] += count;
-    }
+//function changePoints(name, count) {
+//  students.map(function (names, i) {
+//    if(names == name ) {
+//      points[i] += count;
+//    }
+//  });
+//
+//}
+//changePoints('Ирина Овчинникова', 30);
+//changePoints('Александр Малов', 30);
+//
+//console.log(students);
+//console.log(points);
+
+// Task #5
+
+function getTop(list, point, count) {
+  var maxPointIn;
+  var max = 0;
+  var studentsReating = [];
+  console.log('Топ ' + count + ' :\n');
+  for(var i = 0; i < count; i++) {
+    point.reduce(function (prev, elem, i) {
+      if (max < elem) {
+        maxPointIn = i;
+        max = elem
+      }
+      return prev = elem;
+    });
+      studentsReating.push(list[maxPointIn]);
+      studentsReating.push(point[maxPointIn]);
+      delete point[maxPointIn];
+      max = 0;
+      maxPointIn = 0;
+
+  }
+  studentsReating.forEach(function (name, j) {
+      if(j % 2 === 0) {
+        console.log(studentsReating[j] + ' - ' + studentsReating[j + 1] + ' баллов');
+      }
   });
-
 }
-changePoints('Ирина Овчинникова', 30);
-changePoints('Александр Малов', 30);
-
-console.log(students);
-console.log(points);
-
-
+getTop(students, points, 5);
 
 
 
