@@ -29,20 +29,28 @@ points = studentsAndPoints.filter(function (number, i) {
 
 // Task #2
 
-students.forEach(function (val, i, students) {
-  console.log('Студент ' + students[i] + ' набрал ' + points[i] + ' баллов');
-});
+//students.forEach(function (val, i, students) {
+//  console.log('Студент ' + students[i] + ' набрал ' + points[i] + ' баллов');
+//});
 
 // Task #3
 
 var maxPointIn;
+var max = 0;
 points.reduce(function (prev, elem, i) {
-  var maxPoint;
-  if(maxPoint < elem)
+
+  if(max < elem) {
     maxPointIn = i;
-  return elem;
+    max = elem
+  }
+  return prev = elem;
 });
 
+//var arr = [1, 2, 3, 4, 5]
+//
+//var result = arr.reduce(function(sum, current) {
+//  return sum + current;
+//}, 0);
 
 
 
