@@ -27,7 +27,7 @@ studentsAndPoints.forEach(function (val, i) {
 });
 
 console.log(students);
-
+//
 
 
 
