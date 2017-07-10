@@ -42,12 +42,22 @@ newStudents.forEach(function (val, i) {
   }
 });
 
-console.log(students);
 
 // Task #3
 
+function changePoints(name, count) {
+  students.map(function (names, i) {
+    if(names.name == name ) {
+      students[i].point += count;
+    }
+  });
 
+}
+changePoints('Ирина Овчинникова', 30);
+changePoints('Александр Малов', 30);
+changePoints('Николай Фролов', 10);
 
+console.log(students);
 
 
 
