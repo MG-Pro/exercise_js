@@ -24,7 +24,10 @@ function Student(name, point) {
 // Task #2
 
 
-var StudentList = new Array(groupName, list)
-StudentList.groupName = groupName;
-  
+function StudentList(groupName, list) {
+  StudentList.groupName = groupName;
+  Array.apply(this);
+}
+
+
 console.log(StudentList);
