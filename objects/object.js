@@ -57,7 +57,7 @@ changePoints('Ирина Овчинникова', 30);
 changePoints('Александр Малов', 30);
 changePoints('Николай Фролов', 10);
 
-console.log(students);
+
 
 // Task #4
 
@@ -70,12 +70,24 @@ function getTop(list, point) {
   });
 
 }
+// getTop(students, 30)
 
-getTop(students, 30)
+// Task #5
 
+students.forEach(function (val) {
+  val.worksAmount = val.point / 10;
+});
 
+console.log(students);
 
+// Task #6
 
+students.forEach(function (val, i) {
+  val.findByName = function (name) {
+    if(name == val.name)
+      return val;
+  };
+});
 
-
+console.log(students[2].findByName('Глеб Стукалов'));
 
