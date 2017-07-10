@@ -59,7 +59,19 @@ changePoints('Николай Фролов', 10);
 
 console.log(students);
 
+// Task #4
 
+function getTop(list, point) {
+  console.log('Список студентов:');
+  list.forEach(function (val, i) {
+    if(val.point >= point) {
+      console.log('Студент %s набрал %s баллов', val.name, val.point)
+    }
+  });
+
+}
+
+getTop(students, 30)
 
 
 
