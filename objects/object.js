@@ -21,16 +21,30 @@ studentsAndPoints.forEach(function (val, i) {
     item.point = studentsAndPoints[i + 1];
     item.show = function () {
       console.log('Студент %s набрал %s баллов', this.name, this.point);
-    }
+    };
+    students.push(item);
+  }
+});
+
+// Task #2
+var newStudents = [
+  'Николай Фролов', 0, 'Олег Боровой', 0
+];
+newStudents.forEach(function (val, i) {
+  if(i % 2 === 0) {
+    var item = {};
+    item.name = newStudents[i];
+    item.point = newStudents[i + 1];
+    item.show = function () {
+      console.log('Студент %s набрал %s баллов', this.name, this.point);
+    };
     students.push(item);
   }
 });
 
 console.log(students);
 
-
-
-
+// Task #3
 
 
 
