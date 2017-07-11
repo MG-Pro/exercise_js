@@ -76,7 +76,28 @@ html7.show();
 
 // Task #7
 
+StudentList.prototype.delete = function (name) {
+  var self = this;
+  this.list.forEach(function (val, i) {
+    if(val.name == name)
+      self.list.splice(i, 1);
+  })
+}
 
+function replace(source, target, name) {
+  var student = source.list.filter(function (val, i) {
+      return val.name == name;
+  });
+  source.delete(name);
+  target.add(student[0].name, student[0].point);
+  
+}
+//hj2.add(html7.list[4].name, html7.list[4].point);
+
+replace(html7, hj2, 'Федор Киреев');
+
+console.log(html7);
+console.log(hj2);
 
 
 
