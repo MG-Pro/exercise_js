@@ -20,13 +20,13 @@ function Student(name, point) {
     console.log('Студент %s набрал %s баллов', this.name, this.point);
   };
 }
-
 var student = new Student();
 
 // Task #2
 
-
 function StudentList(groupName, list) {
+  if(!list)
+    list = [];
   this.prototype = Array;
   this.groupName = groupName;
   this.list = [];
@@ -38,12 +38,54 @@ function StudentList(groupName, list) {
   });
   
   this.add = function (name, point) {
-    this.list.push({name:point});
+    this.list.push({name:name, point:point});
   }
 }
 
+// Task #3
+
 var hj2 = new StudentList('HJ-2', studentsAndPoints);
 
-hj2.add('Николай Иванов', 40)
+// Task #4
 
-console.log(hj2);
+hj2.add('Николай Иванов', 0);
+hj2.add('Иван Сергеев', 50);
+hj2.add('Руслан Чумаков', 10);
+hj2.add('Александр Петров', 40);
+hj2.add('Ольга Ушакова', 20);
+
+// Task #5
+
+var html7 = new StudentList('html7');
+
+html7.add('Светлана Степанова', 0);
+html7.add('Павел Поляков', 20);
+html7.add('Ольга Терешина', 30);
+html7.add('Петр Макаров', 50);
+html7.add('Федор Киреев', 90);
+
+// Task #6
+
+StudentList.prototype.show = function () {
+  console.log('Группа %s (%s студентов)', this.groupName, this.list.length);
+  this.list.forEach(function (val, i) {
+    console.log('Студент %s набрал %s баллов', val.name, val.point);
+  });
+};
+html7.show();
+
+// Task #7
+
+
+
+
+
+
+
+
+
+
+
+
+
+
