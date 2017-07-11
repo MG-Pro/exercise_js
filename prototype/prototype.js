@@ -21,13 +21,29 @@ function Student(name, point) {
   };
 }
 
+var student = new Student();
+
 // Task #2
 
 
 function StudentList(groupName, list) {
-  StudentList.groupName = groupName;
-  Array.apply(this);
+  this.prototype = Array;
+  this.groupName = groupName;
+  this.list = [];
+  var self = this;
+  list.forEach(function (val, i) {
+    if(i % 2 === 0) {
+      self.list.push({name: val, point: list[i + 1]});
+    }
+  });
+  
+  this.add = function (name, point) {
+    this.list.push({name:point});
+  }
 }
 
+var hj2 = new StudentList('HJ-2', studentsAndPoints);
 
-console.log(StudentList);
+hj2.add('Николай Иванов', 40)
+
+console.log(hj2);
