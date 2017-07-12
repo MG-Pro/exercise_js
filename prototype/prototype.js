@@ -96,10 +96,33 @@ function replace(source, target, name) {
 
 replace(html7, hj2, 'Федор Киреев');
 
-console.log(html7);
-console.log(hj2);
+//console.log(html7);
+//console.log(hj2);
 
+// Task #8
 
+StudentList.prototype.valueOf = function () {
+  var listPoint =[];
+  var listIndex = [];
+  this.list.forEach(function (val, i) {
+    listPoint.push(val.point);
+    listIndex.push(i);
+  });
+  var maxPoint = Math.max.apply(null, listPoint);
+  var maxStudentIn;
+  listPoint.forEach(function (val, i) {
+    if(val == maxPoint) {
+      maxStudentIn = i;
+    }
+  });
+  return listPoint[maxStudentIn];
+};
+
+StudentList.prototype.max = function () {
+  return +this;
+}
+
+console.log(hj2.max());
 
 
 
