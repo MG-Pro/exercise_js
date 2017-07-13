@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Домашнее задание к лекции 4.5 «Технология AJAX». Задание 1.</title>
+</head>
+<body>
+    <form method="post" action="http://netology-hj-ajax.herokuapp.com/homework/login_json" enctype="application/x-www-form-urlencoded" data-role="json-request-form">
+        <label>
+            Email:
+            <input type="email" name="email" value="" data-role="json-request-form-login" />
+        </label>
+        <label>
+            Password:
+            <input type="password" name="password" value="" data-role="json-request-form-password" />
+        </label>
+        <button type="submit" data-role="json-request-form-submit">Sign in</button>
+        <span data-role="json-request-preloader">
+            <!-- preloader should be displayed here while request is in progress -->
+        </span>
+        <div data-role="json-request-error">
+            <!-- error should be displayed here in case if API responds with error -->
+        </div>
+    </form>
+
+    <div data-role="json-request-user-profile">
+        <!-- user profile should be displayed here after successfull login -->
+
+        <img src="" alt="" data-role="json-request-user-profile-avatar" />
+        <span data-role="json-request-user-profile-fullname">
+            <!-- full name here (name lastname) -->
+        </span>
+        <span data-role="json-request-user-profile-country">
+            <!-- country here -->
+        </span>
+        <span data-role="json-request-user-profile-hobbies">
+            <!-- hobbies here, comma separated -->
+        </span>
+
+        <button data-role="json-request-user-profile-logout">Sign out</button>
+    </div>
+</body>
+</html>
