@@ -6,8 +6,8 @@ document.getElementById('submit').addEventListener('click', function (e) {
   var body = '';
   var formIrem = document.getElementsByClassName('form__item');
   var result;
-  for(var i = 0, sep = '&'; i < formIrem.length; i++) {
-    if(i + 1 == formIrem.length)
+  for (var i = 0, sep = '&'; i < formIrem.length; i++) {
+    if (i + 1 == formIrem.length)
       sep = '';
     body += formIrem[i].name + '=' + encodeURIComponent(formIrem[i].value) + sep;
   }
@@ -24,7 +24,7 @@ document.getElementById('submit').addEventListener('click', function (e) {
 
   xhr.addEventListener('load', function () {
     console.log(xhr.readyState + ":" + xhr.status);
-    if(xhr.readyState == '4' && xhr.status == '200') {
+    if (xhr.readyState == '4' && xhr.status == '200') {
       result = JSON.parse(xhr.responseText);
       document.forms[0].style.display = 'none';
       document.getElementsByClassName('profile')[0].style.display = 'block';
@@ -37,9 +37,7 @@ document.getElementById('submit').addEventListener('click', function (e) {
       errorElem.innerHTML = 'Error';
     }
   });
-
-
-
+  //
 
   xhr.send(body);
 
