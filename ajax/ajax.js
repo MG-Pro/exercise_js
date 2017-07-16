@@ -6,8 +6,8 @@ document.getElementById('submit').addEventListener('click', function (e) {
   var body = '';
   var formIrem = document.getElementsByClassName('form__item');
   var result;
-  for(var i = 0, sep = '&'; i < formIrem.length; i++) {
-    if(i + 1 == formIrem.length)
+  for (var i = 0, sep = '&'; i < formIrem.length; i++) {
+    if (i + 1 == formIrem.length)
       sep = '';
     body += formIrem[i].name + '=' + encodeURIComponent(formIrem[i].value) + sep;
   }
@@ -24,12 +24,22 @@ document.getElementById('submit').addEventListener('click', function (e) {
 
   xhr.addEventListener('load', function () {
     console.log(xhr.readyState + ":" + xhr.status);
-    if(xhr.readyState == '4' && xhr.status == '200') {
+    if (xhr.readyState == '4' && xhr.status == '200') {
       result = JSON.parse(xhr.responseText);
       document.forms[0].style.display = 'none';
       document.getElementsByClassName('profile')[0].style.display = 'block';
       document.getElementsByClassName('profile__img')[0].setAttribute('src', result.userpic);
       document.getElementsByClassName('profile__fullname')[0].innerHTML = result.name + ' ' + result.lastname;
+      if(result.online) {
+        document.getElementById('profile__online-mark').style.backgroundColor = 'green';
+      } else {
+        document.getElementById('profile__online-mark').style.backgroundColor = 'grey';
+      }
+      var profile__item =  document.getElementsByClassName('profile__item');
+      profile__item[0].innerHTML = 'Age: ' + result.age;
+      profile__item[1].innerHTML = 'Country: ' + result.country;
+      profile__item[2].innerHTML = 'Job: <br> Company: ' + result.job.company + '<br>' + 'Position: ' + result.job.position;
+      profile__item[3].innerHTML = 'Hobbies: ' + result.hobbies.join(', ');
 
       console.log(result);
     } else {
@@ -37,10 +47,10 @@ document.getElementById('submit').addEventListener('click', function (e) {
       errorElem.innerHTML = 'Error';
     }
   });
-
-
-
-
   xhr.send(body);
+});
 
+document.getElementsByClassName('profile_button')[0].addEventListener('click', function () {
+  document.getElementsByClassName('profile')[0].style.display = 'none';
+  document.forms[0].style.display = 'inline-block';
 });

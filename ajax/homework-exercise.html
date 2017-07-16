@@ -26,10 +26,15 @@
 </form>
 <div class="profile" data-role = "json-request-user-profile">
   <img class="profile__img" src = "ava.jpg" alt = "" data-role = "json-request-user-profile-avatar"/>
+  <div id="profile__online-mark"></div>
+  <div class="profile__text-wrap">
   <span class="profile__fullname" data-role = "json-request-user-profile-fullname"></span>
-  <button class="button preloader_button" data-role = "json-request-user-profile-logout">Sign out</button>
+  <button class="button profile_button" data-role = "json-request-user-profile-logout">Sign out</button>
+  <span class="profile__item"></span>
   <span class="profile__item" data-role = "json-request-user-profile-country"></span>
+  <span class="profile__item"></span>
   <span class="profile__item" data-role = "json-request-user-profile-hobbies"></span>
+  </div>
 </div>
 </div>
 <script src="ajax.js"></script>
