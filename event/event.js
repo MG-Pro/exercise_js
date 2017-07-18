@@ -15,3 +15,4 @@ document.getElementById('buttonList2').addEventListener('click', function (e) {
     targetElem.style.backgroundColor = 'yellow';
   }
 });
+// Task #2-1
