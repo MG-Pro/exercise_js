@@ -11,6 +11,7 @@ function Ball(size, posX, posY, color) {
   this.ball.style.height = sizePx;
   this.ball.style.left = posX;
   this.ball.style.top = posY;
+  this.ball.style.backgroundColor = color;
 
   this.angle;
 
@@ -26,17 +27,21 @@ function Ball(size, posX, posY, color) {
 
 
     var id = setInterval(function () {
-      posX = (parseInt(self.posX) + posCount * Math.cos(self.angle));
-      posY = (parseInt(self.posY) + posCount * Math.sin(self.angle));
+      posX = (parseFloat (self.posX) + posCount * Math.cos(self.angle));
+      posY = (parseFloat (self.posY) + posCount * Math.sin(self.angle));
       posCount++;
-      this;
+      
       if (posX >= posXend || posY >= posYend) {
-        self.angle = self.angle + Math.PI / 2;
+        self.angle = self.angle + Math.PI / 8;
         posCount = 0;
         self.posX = posX - 1;
         self.posY = posY - 1;
-        posXend = 0;
-        posYend = 0;
+      }
+      if(posX < 0 || posY < 0) {
+        self.angle = self.angle + Math.PI / 8;
+        posCount = 0;
+        self.posX = posX + 1;
+        self.posY = posY + 1;
       }
       self.ball.style.left = posX + 'px';
       self.ball.style.top = posY + 'px';
@@ -47,5 +52,17 @@ function Ball(size, posX, posY, color) {
 
 }
 
-var item = new Ball(20, 0, 0);
-item.move(20);
+var item = new Ball(20, 0, 0, 'green');
+item.move(10);
+
+var item2 = new Ball(30, 0, 0, 'red');
+item2.move(20);
+
+var item3 = new Ball(30, 0, 0, 'blue');
+item3.move(50);
+
+var item4 = new Ball(30, 0, 0, 'grey');
+item4.move(80);
+
+var item5 = new Ball(30, 0, 0, 'brown');
+item5.move(45);
