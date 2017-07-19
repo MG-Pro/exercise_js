@@ -41,3 +41,38 @@ document.querySelector('.form-group ul').addEventListener('click', function (e) 
   }
   eventCount = true;
 });
+
+// Task #2-2
+
+document.getElementById('exampleInputPassword1').addEventListener('input', function (e) {
+  if(this.value.length != 0 && this.value.length < 5) {
+    var passInput = document.getElementById('passdiff');
+    passInput.style.color = 'red';
+    passInput.innerHTML = 'Пароль должен быть длиннее 5 символов';
+  } else if (this.value.length == 0) {
+    var passInput = document.getElementById('passdiff');
+    passInput.innerHTML = '';
+  } else {
+    var passInput = document.getElementById('passdiff');
+    passInput.style.color = 'green';
+    passInput.innerHTML = 'Хороший пароль';
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
