@@ -59,7 +59,15 @@ document.getElementById('exampleInputPassword1').addEventListener('input', funct
   }
 });
 
+// Task #2-3
 
+document.getElementById('helpBlock').addEventListener('mouseenter', function (e) {
+  this.classList.add('active');
+});
+
+document.getElementById('helpBlock').addEventListener('mouseleave', function (e) {
+  this.classList.remove('active');
+});
 
 
 
