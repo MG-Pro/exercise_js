@@ -20,7 +20,7 @@ document.getElementById('buttonList2').addEventListener('click', function (e) {
 // Task #2-1
 var eventCount = false;
 document.body.addEventListener('click', function (e) {
-  if(e.target.nodeName != 'LI' && eventCount == true) {
+  if (e.target.nodeName != 'LI' && eventCount == true) {
     var lists = document.querySelectorAll('.form-group ul > li');
     for (var i = 0; i < lists.length; i++) {
       lists[i].style.backgroundColor = 'transparent';
@@ -28,7 +28,7 @@ document.body.addEventListener('click', function (e) {
   }
 });
 document.querySelector('.form-group ul').addEventListener('click', function (e) {
-  if(e.target.nodeName != 'LI')
+  if (e.target.nodeName != 'LI')
     return;
   if (e.ctrlKey) {
     e.target.style.backgroundColor = '#9a9292';
@@ -45,7 +45,7 @@ document.querySelector('.form-group ul').addEventListener('click', function (e) 
 // Task #2-2
 
 document.getElementById('exampleInputPassword1').addEventListener('input', function (e) {
-  if(this.value.length != 0 && this.value.length < 5) {
+  if (this.value.length != 0 && this.value.length < 5) {
     var passInput = document.getElementById('passdiff');
     passInput.style.color = 'red';
     passInput.innerHTML = 'Пароль должен быть длиннее 5 символов';
@@ -69,9 +69,67 @@ document.getElementById('helpBlock').addEventListener('mouseleave', function (e)
   this.classList.remove('active');
 });
 
+// Task #2-4
 
+document.getElementById('slider').addEventListener('mousedown', function (e) {
+  var thumb = this.firstElementChild;
+  var slider = this;
+  var rectSlider = this.getBoundingClientRect();
+  var widthSlider = rectSlider.width;
+  move(e);
+  function move(e) {
+    slider.ondragstart = function (e) {
+      return false;
+    };
 
+    var rectThumb = thumb.getBoundingClientRect();
+    var currentPos = rectThumb.left;
+    var shift = e.pageX - currentPos;
+    var currentLeft =  currentPos - rectSlider.left;
+    var pos = currentLeft + shift;
+    if(pos < 0) {
+      pos *= 0;
+    } else if (pos > widthSlider) {
+      pos = widthSlider;
+    }
+    thumb.style.left = pos + 'px';
+  }
 
+  this.addEventListener('mousemove', move);
+  document.body.addEventListener('mouseup', function () {
+    slider.removeEventListener('mousemove', move);
+  });
+
+});
+
+//var slider = document.getElementById('slider');
+//var item = slider.firstElementChild;
+//
+//var sliderClientCoords = slider.getBoundingClientRect();
+//var sliderCoords = {};
+//sliderCoords.left = sliderClientCoords.left + pageXOffset;
+//
+//item.onmousedown = function (e) {
+//
+//  var itemClientCoords = item.getBoundingClientRect();
+//  var itemCoords = {};
+//  itemCoords.left = itemClientCoords.left + pageXOffset;
+//
+//  var right = slider.offsetWidth - item.offsetWidth;
+//  var shiftX = e.pageX - itemCoords.left;
+//
+//  document.onmousemove = function (e) {
+//    var newLeft = e.pageX - sliderCoords.left - shiftX;
+//    if (newLeft < 0) newLeft = 0;
+//    if (newLeft > right) newLeft = right;
+//    item.style.left = newLeft + 'px';
+//    return false;
+//  }
+//
+//  document.onmouseup = function () {
+//    document.onmousemove = document.onmouseup = null;
+//  }
+//}
 
 
 
