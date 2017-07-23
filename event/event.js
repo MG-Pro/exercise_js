@@ -85,53 +85,36 @@ document.getElementById('slider').addEventListener('mousedown', function (e) {
     var rectThumb = thumb.getBoundingClientRect();
     var currentPos = rectThumb.left;
     var shift = e.pageX - currentPos;
-    var currentLeft =  currentPos - rectSlider.left;
+    var currentLeft = currentPos - rectSlider.left;
     var pos = currentLeft + shift;
-    if(pos < 0) {
-      pos *= 0;
+    if (pos < 0) {
+      pos = 0;
     } else if (pos > widthSlider) {
       pos = widthSlider;
     }
     thumb.style.left = pos + 'px';
+    return false;
   }
 
-  this.addEventListener('mousemove', move);
+  document.body.addEventListener('mousemove', move);
   document.body.addEventListener('mouseup', function () {
-    slider.removeEventListener('mousemove', move);
+    document.body.removeEventListener('mousemove', move);
   });
-
 });
 
-//var slider = document.getElementById('slider');
-//var item = slider.firstElementChild;
-//
-//var sliderClientCoords = slider.getBoundingClientRect();
-//var sliderCoords = {};
-//sliderCoords.left = sliderClientCoords.left + pageXOffset;
-//
-//item.onmousedown = function (e) {
-//
-//  var itemClientCoords = item.getBoundingClientRect();
-//  var itemCoords = {};
-//  itemCoords.left = itemClientCoords.left + pageXOffset;
-//
-//  var right = slider.offsetWidth - item.offsetWidth;
-//  var shiftX = e.pageX - itemCoords.left;
-//
-//  document.onmousemove = function (e) {
-//    var newLeft = e.pageX - sliderCoords.left - shiftX;
-//    if (newLeft < 0) newLeft = 0;
-//    if (newLeft > right) newLeft = right;
-//    item.style.left = newLeft + 'px';
-//    return false;
-//  }
-//
-//  document.onmouseup = function () {
-//    document.onmousemove = document.onmouseup = null;
-//  }
-//}
-
-
+// Task 2-5
+document.getElementById('submit').addEventListener('click', function (e) {
+  e.preventDefault();
+  var form = document.forms[0];
+  var formElem = form.elements;
+  for (var i = 0; i < formElem.length; i++) {
+    if (formElem[i].nodeName === 'INPUT' && !e.shiftKey) {
+      console.log(formElem[i].value);
+    } else if (formElem[i].nodeName === 'INPUT' && e.shiftKey) {
+      alert(formElem[i].value);
+    }
+  }
+});
 
 
 
