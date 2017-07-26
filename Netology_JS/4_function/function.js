@@ -3,20 +3,15 @@
 // Task #1
 
 function getWarrantyCost(term) {
-  var msg = '';
-  if (!term || term <= 0)
-    return 0;
-  if (term > 2) {
-    term = 2;
-    msg = '(максимальный срок гарантии 2 года) '
-  }
-  if (term <= 2 && term > 1)
-    return msg + 2300;
-  else
+  if (term === 1)
     return 1250;
+  else if (term === 2)
+    return 2300;
+  else
+    return 0;
 }
 
-console.log(`Дополнительное гарантийное обслуживание: ${getWarrantyCost()} Q`);
+console.log(`Дополнительное гарантийное обслуживание: ${getWarrantyCost(3)} Q`);
 
 // Task #2
 
@@ -34,37 +29,30 @@ console.log(`Подарочная упаковка и гравировка: ${ge
 // Task #3
 
 function getDeliveryCost(delivery, place) {
-  let price;
   if (!delivery) return 0;
   switch (place) {
     case 'Луна':
       return 150;
-      break;
     case 'Крабовидная туманность':
-      price = 250;
-      break;
+      return 250;
     case 'Галактика Туманность Андромеды':
-      price = 550;
-      break;
+      return 550;
     case 'Туманность Ориона':
-      price = 600;
-      break;
+      return 600;
     case 'Звезда смерти':
-      price = 'договорная цена';
-      break;
+      return 'договорная цена';
     default:
-      price = NaN;
+      return NaN;
   }
-  return price;
 }
 
-var result = getDeliveryCost(false, 'Луна');
+var result = getDeliveryCost(true, 'Туманность');
 
 if (result) {
   console.log(`Стоимость доставки: ${result} Q`);
 } else if (result === 0) {
   console.log(`Доставка не требуется`);
-} else if (!result) {
+} else {
   console.log(`Ошибка при расчете стоимости доставки`);
 }
 
@@ -75,52 +63,42 @@ function getOrderCost(term, str, delivery, place) {
   let engravingCost;
   let deliveryCost;
 
-  let msg = '';
   let wordPrice = 11;
   let wordsCount = str.split(' ').length;
 
-  if (term > 2) {
-    term = 2;
-    msg += '(максимальный срок гарантии 2 года) '
-  }
-
-  if (!term || term <= 0) warrantyCost = 0;
-  if (term <= 2 && term > 1)
+  if (term === 1)
+    warrantyCost = 1250;
+  else if (term === 2)
     warrantyCost = 2300;
   else
-    warrantyCost = 1250;
-
-  if (!delivery) {
-    deliveryCost = 0;
-  } else {
-    switch (place) {
-      case 'Луна':
-        deliveryCost = 150;
-        break;
-      case 'Крабовидная туманность':
-        deliveryCost = 250;
-        break;
-      case 'Галактика Туманность Андромеды':
-        deliveryCost = 550;
-        break;
-      case 'Туманность Ориона':
-        deliveryCost = 600;
-        break;
-      case 'Звезда смерти':
-        deliveryCost = 0;
-        msg += '\nДоговорная цена доставки';
-        break;
-      default:
-        deliveryCost = 0;
-        msg += '\nCтоимость доставки не определена';
-    }
-  }
+    warrantyCost = 0;
 
   if (!str) engravingCost = 0;
   engravingCost = wordPrice * wordsCount;
 
+  function getDeliveryCost(delivery, place) {
+    if (!delivery) {
+      return 0;
+    } else {
+      switch (place) {
+        case 'Луна':
+          return 150;
+        case 'Крабовидная туманность':
+          return 250;
+        case 'Галактика Туманность Андромеды':
+          return 550;
+        case 'Туманность Ориона':
+          return 600;
+        default:
+          return 0;
+      }
+    }
+  }
+
+  deliveryCost = getDeliveryCost(delivery, place);
+
   let orderCost = warrantyCost + engravingCost + deliveryCost;
-  return [orderCost, term, warrantyCost, engravingCost, deliveryCost, place, msg];
+  return [orderCost, term, warrantyCost, engravingCost, deliveryCost, place];
 }
 
 var orderResult = getOrderCost(3, string, true, 'Звезда');
@@ -129,7 +107,6 @@ console.log(`Общая стоимость заказа: ${orderResult[0]} Q.`);
 console.log(`Из них ${orderResult[2]} Q за гарантийное обслуживание на ${orderResult[1]} год/года.`);
 console.log(`Гравировка на сумму ${orderResult[3]} Q.`);
 console.log(`Доставка в область ${orderResult[5]}: ${orderResult[4]} Q.`);
-console.log(orderResult[6]);
 
 
 
