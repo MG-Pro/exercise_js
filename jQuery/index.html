@@ -5,9 +5,58 @@
   <meta name = "viewport" content = "width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <title>jQuary</title>
   <link rel = "stylesheet" href = "">
-  <script type = "text/javascript" src = "jQuery.js"></script>
+  <script
+    src="http://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #4d4d4d;
+    }
+    .container {
+      max-width: 960px;
+      margin: auto;
+    }
+    #form {
+      max-width: 400px;
+      margin: 110px auto;
+      border: 1px solid;
+      padding: 20px;
+      background-color: darksalmon;
+    }
+    .input {
+      width: 100%;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+      font-size: 18px;
+      padding: 3px;
+    }
+    .desc {
+      margin-bottom: 3px;
+      font-family: sans-serif;
+    }
+  </style>
 </head>
 <body>
-
+  <div class="container">
+    <form id = "form">
+      <p class="desc">Исходная валюта</p>
+      <select class="input" name = "" id = "sourceCur">
+      </select>
+      <p class="desc">Сумма</p>
+      <input class="input" type = "text" id = "sourceSum">
+      <p class="desc">Новая валюта</p>
+      <select class="input" name = "" id = "targetCur">
+      </select>
+      <p class="desc">Сумма</p>
+      <input class="input" type = "text" id = "targetSum">
+    </form>
+  </div>
+  <script type = "text/javascript" src = "jQuery.js"></script>
 </body>
 </html>
