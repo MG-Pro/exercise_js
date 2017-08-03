@@ -1,15 +1,16 @@
 $(document).ready(function () {
+  'use strict';
+  
   let curList = {}; // объект для хранения списка валют
   let sourceCurList = $("#sourceCur"); // поле выбора исходной валюты
   let targetCurList = $("#targetCur"); // поле выборы целевой валюты
   let sourceSum = $('#sourceSum'); // поле ввода количества исходной валюты
   let targetSum = $('#targetSum'); // поле ввода количества целевой валюты
-  let sourceCurrencyCount; // количество исходной валюты
-  let targetCurrencyCount; // количество целевой валюты
-  let sourceRateCurrency; // курс исходной валюты
-  let targetRateCurrency; // курс целевой валюты
-  let nominalCurrency;
-
+  let sourceCurrencyCount = 0; // количество исходной валюты
+  let targetCurrencyCount = 0; // количество целевой валюты
+  let sourceCurrency = {}; // объект исходной валюты
+  let targetCurrency = {}; // объект целевой валюты
+  
   if (!curList.length) {
     $.ajax({
       url: "http://university.netology.ru/api/currency",
@@ -27,54 +28,58 @@ $(document).ready(function () {
         targetCurList.append("<option>" + val.Name + "</option>");
       });
       curList = result;
-      sourceRateCurrency = getCurrencyVal(sourceCurList.val());
-      targetRateCurrency = getCurrencyVal(targetCurList.val());
+      sourceCurrency = getCurrencyVal(sourceCurList.val());
+      targetCurrency = getCurrencyVal(targetCurList.val());
     });
   }
-
+  
   // получаем значение курса для выбранной валюты
   function getCurrencyVal(name) {
     let curRate;
     curList.some(function (val) {
       if (name === val.Name) {
-        curRate = val.Value;
+        curRate = val;
         return true;
       }
     });
-    console.log(curRate);
     return curRate;
   }
-
-  function calcTagetCurrencyVal() {
-    targetCurrencyCount = sourceCurrencyCount * sourceRateCurrency / targetRateCurrency ;
-    targetCurrencyCount =  Math.round(targetCurrencyCount * 100) / 100;
-    targetSum.val(targetCurrencyCount);
-  }
-
-
-  sourceSum.on('input', function (e) {
-    if (this.value.match(/[^0-9\.?]/g)) {
-      this.value = this.value.replace(/[^0-9\.?]/g, '');
+  
+  function calcCurrency(point) {
+    if (point === undefined || point) {
+      targetCurrencyCount = sourceCurrencyCount * sourceCurrency.Value * targetCurrency.Nominal / targetCurrency.Value;
+      targetCurrencyCount = Math.round(targetCurrencyCount * 100) / 100;
+      targetSum.val(targetCurrencyCount);
+    } else {
+      sourceCurrencyCount = targetCurrencyCount * targetCurrency.Value * sourceCurrency.Nominal / sourceCurrency.Value;
+      sourceCurrencyCount = Math.round(sourceCurrencyCount * 100) / 100;
+      sourceSum.val(sourceCurrencyCount);
     }
+  }
+  
+  sourceSum.on('input', function (e) {
+    if (this.value.match(/[^0-9\.?]/g))
+      this.value = this.value.replace(/[^0-9\.?]/g, '');
     sourceCurrencyCount = this.value;
-    calcTagetCurrencyVal();
+    calcCurrency();
   });
-
+  
+  targetSum.on('input', function (e) {
+    if (this.value.match(/[^0-9\.?]/g))
+      this.value = this.value.replace(/[^0-9\.?]/g, '');
+    targetCurrencyCount = this.value;
+    calcCurrency(false);
+  });
+  
   sourceCurList.on('change', function (e) {
-    let sourceNameCurrency = $(this).val();
-    sourceRateCurrency = getCurrencyVal(sourceNameCurrency);
-    calcTagetCurrencyVal();
-
+    sourceCurrency = getCurrencyVal($(this).val());
+    calcCurrency();
   });
-
+  
   targetCurList.on('change', function (e) {
-    let targetNameCurrency = $(this).val();
-    targetRateCurrency = getCurrencyVal(targetNameCurrency);
-    calcTagetCurrencyVal();
+    targetCurrency = getCurrencyVal($(this).val());
+    calcCurrency();
   });
-
-
-
 });
 
 
