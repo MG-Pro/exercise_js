@@ -47,7 +47,7 @@ const deferedPayments = [];
 
 function deferPay(producer, supplySum, supplyDate) {
   let supply = {};
-  supply.producer = producer.name;
+  supply.producer = producer;
   supply.amount = supplySum;
   supply.paymentDate = supplyDate;
   supply.paymentDate.setDate(supplyDate.getDate() + producer.deferPeriod);
@@ -66,7 +66,7 @@ function printDeferPay(list) {
       month: 'numeric',
       year: 'numeric'
     });
-    console.log(`${val.paymentDate}: ${val.producer}, сумма ${val.amount} Q`);
+    console.log(`${val.paymentDate}: ${val.producer.name}, сумма ${val.amount} Q`);
   })
 }
 
@@ -79,17 +79,22 @@ function loadCurrencyJSON() {
 }
 
 function convertCurrency(amount, from, to) {
-  let currencyList = JSON.parse(loadCurrencyJSON());
+  try {
+    var currencyList = JSON.parse(loadCurrencyJSON());
+  } catch (err) {
+    console.log(`Ошибка исходных данных "${err.message}"`);
+  }
+  
   let fromVal, toVal;
-  for (let key in  currencyList) {
+  for (let key in currencyList) {
+    
     if (from === key)
       fromVal = currencyList[key];
-    if (to === key)
+    else if (to === key)
       toVal = currencyList[key];
   }
   let result = amount * fromVal / toVal;
   return Math.round(result * 100) / 100;
-
 }
 
 console.log(`Сумма ${convertCurrency(7000, 'ZZZ', 'USD')} Q`);
