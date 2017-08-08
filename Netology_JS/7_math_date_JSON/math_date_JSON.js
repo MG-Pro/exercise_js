@@ -80,12 +80,12 @@ function loadCurrencyJSON() {
 
 function convertCurrency(amount, from, to) {
   try {
-    var currencyList = JSON.parse(loadCurrencyJSON());
+    let currencyList = JSON.parse(loadCurrencyJSON());
+    let result = amount * currencyList[from] / currencyList[to];
+    return Math.round(result * 100) / 100;
   } catch (err) {
     console.log(`Ошибка исходных данных "${err.message}"`);
   }
-  let result = amount * currencyList[from] / currencyList[to];
-  return Math.round(result * 100) / 100;
 }
 
 console.log(`Сумма ${convertCurrency(7000, 'ZZZ', 'USD')} Q`);
