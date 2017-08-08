@@ -84,16 +84,7 @@ function convertCurrency(amount, from, to) {
   } catch (err) {
     console.log(`Ошибка исходных данных "${err.message}"`);
   }
-  
-  let fromVal, toVal;
-  for (let key in currencyList) {
-    
-    if (from === key)
-      fromVal = currencyList[key];
-    else if (to === key)
-      toVal = currencyList[key];
-  }
-  let result = amount * fromVal / toVal;
+  let result = amount * currencyList[from] / currencyList[to];
   return Math.round(result * 100) / 100;
 }
 
