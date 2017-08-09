@@ -58,6 +58,32 @@ for (let item of items) {
   console.log(`Товар ${item}`);
 }
 
+//##############
+
+itemPrototype.unHold = function (amount) {
+  if (!amount) {
+    amount = this.holded;
+  }
+  if (this.holded < amount) {
+    return false;
+  }
+  this.holded -= amount;
+  this.available += amount;
+  return true;
+};
+
+items[0].unHold(2);
+items[2].unHold(1);
+items[1].unHold(13);
+items[1].unHold(3);
+
+for (let item of items) {
+  console.log(`Товар ${item}`);
+}
+
+
+
+
 
 
 
