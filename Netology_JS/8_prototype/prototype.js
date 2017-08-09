@@ -81,6 +81,36 @@ for (let item of items) {
   console.log(`Товар ${item}`);
 }
 
+// Task #2
+
+for (let item of positions) {
+  Object.defineProperty(item, "finalPrice", {
+    get: function() {
+      return this.price - this.price * this.discount / 100;
+    },
+    set: function (newFinalPrice) {
+      if(newFinalPrice > this.price) {
+        console.log(`Новая цена больше чем базовая цена`)
+        return;
+      }
+      this.discount = Math.round((100 - newFinalPrice * 100 / this.price) * 100)  / 100;
+    }
+
+  });
+}
+
+for (let item of positions) {
+  console.log(` ${item.discount}`);
+}
+
+positions[2].finalPrice = 58000;
+
+for (let item of positions) {
+  console.log(` ${item.discount}`);
+}
+
+// Task #3
+
 
 
 
