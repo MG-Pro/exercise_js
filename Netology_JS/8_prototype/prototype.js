@@ -111,12 +111,34 @@ for (let item of positions) {
 
 // Task #3
 
+function isValidPosition(item, options) {
+  if(Object.keys(item).toString() === options.toString())
+    return true;
+  else
+    return false;
+}
 
+const requiredFields = [ 'title', 'price', 'discount', 'available' ];
+let form1 = {
+  title: 'Товар Телепорт бытовой VZHIH-101',
+  price: 7800,
+  discount: 0
+};
+let form2 = {
+  title: 'Товар Телепорт бытовой VZHIH-101',
+  discount: 10
+};
+let form3 = {
+  title: 'Товар Телепорт бытовой VZHIH-101',
+  discount: 10,
+  available: 0
+};
 
-
-
-
-
+if ( isValidPosition(form3, requiredFields) ) {
+  console.log('Форма №1 заполнена верно');
+} else {
+  console.log('В форме №1 не заполнены необходимые поля');
+}
 
 
 
