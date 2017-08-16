@@ -35,7 +35,12 @@ const itemPrototype = {
   }
 };
 
-function sellItem(item, amount, isHolded) {
+function sellItem(item, amount, isHolded = false) {
+  if (isHolded) {
+    itemPrototype.sellHolded.call(item, amount);
+  } else {
+    itemPrototype.sellAvailable.call(item, amount);
+  }
 
 }
 
@@ -52,7 +57,19 @@ sellItem(item, 1, true);
 console.log(item.available); // 0
 console.log(item.holded); // 0
 
+// Task #2
 
+function formatFull() {
+  return `${this.title}:\n\tдоступно ${this.available} шт.\n\tв резерве ${this.holded} шт.`;
+}
+
+function formatLite() {
+  return `${this.title} (${this.available} + ${this.holded})`;
+}
+
+function show(format) {
+  console.log(format());
+}
 
 
 
