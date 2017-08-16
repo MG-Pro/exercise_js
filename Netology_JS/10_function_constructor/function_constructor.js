@@ -71,10 +71,18 @@ function show(format) {
   console.log(format());
 }
 
+function showItems(list, formatter) {
+  for (let item of list) {
+    let showItem = formatter.bind(item);
+    show(showItem);
+  }
+}
 
+showItems(items, formatFull);
+console.log('---');
+showItems(items, formatLite);
 
-
-
+// Task #3
 
 
 
