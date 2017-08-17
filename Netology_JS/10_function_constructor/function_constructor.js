@@ -84,10 +84,31 @@ showItems(items, formatLite);
 
 // Task #3
 
+function createButton(title, onclick) {
+  return {
+    title,
+    onclick,
+    click() {
+      this.onclick.call(this);
+    }
+  };
+}
 
+let buttons = [];
 
+function createBuyButtons(items) {
+  for (let item of items) {
+    buttons.push(createButton.call(item, 'Купить', function () {
+      console.log(`${item.title} добавлен в корзину`);
+    }));
+  }
+}
 
+createBuyButtons(items);
 
+buttons[0].click();
+buttons[2].click();
+buttons[1].click();
 
 
 
