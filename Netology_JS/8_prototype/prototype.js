@@ -85,15 +85,15 @@ for (let item of items) {
 
 for (let item of positions) {
   Object.defineProperty(item, "finalPrice", {
-    get: function() {
+    get: function () {
       return this.price - this.price * this.discount / 100;
     },
     set: function (newFinalPrice) {
-      if(newFinalPrice > this.price) {
+      if (newFinalPrice > this.price) {
         console.log(`Новая цена больше чем базовая цена`)
         return;
       }
-      this.discount = Math.round((100 - newFinalPrice * 100 / this.price) * 100)  / 100;
+      this.discount = Math.round((100 - newFinalPrice * 100 / this.price) * 100) / 100;
     }
 
   });
@@ -112,13 +112,17 @@ for (let item of positions) {
 // Task #3
 
 function isValidPosition(item, options) {
-  if(Object.keys(item).toString() === options.toString())
-    return true;
-  else
-    return false;
+  return options.every(function (val) {
+    if (val in item) {
+      return true;
+    } else
+      return false;
+  });
+
+
 }
 
-const requiredFields = [ 'title', 'price', 'discount', 'available' ];
+const requiredFields = ['title', 'price', 'discount'];
 let form1 = {
   title: 'Товар Телепорт бытовой VZHIH-101',
   price: 7800,
@@ -134,7 +138,7 @@ let form3 = {
   available: 0
 };
 
-if ( isValidPosition(form3, requiredFields) ) {
+if (isValidPosition(form3, requiredFields)) {
   console.log('Форма №1 заполнена верно');
 } else {
   console.log('В форме №1 не заполнены необходимые поля');
