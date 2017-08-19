@@ -12,7 +12,7 @@ const items = [
   },
   {
     title: 'Меч световой FORCE (синий луч)',
-    available: 1,
+    available: 0,
     holded: 1
   }
 ];
@@ -36,12 +36,15 @@ const itemPrototype = {
 };
 
 function sellItem(item, amount, isHolded = false) {
-  if (isHolded) {
-    itemPrototype.sellHolded.call(item, amount);
-  } else {
-    itemPrototype.sellAvailable.call(item, amount);
+  try {
+    if (isHolded) {
+      itemPrototype.sellHolded.call(item, amount);
+    } else {
+      itemPrototype.sellAvailable.call(item, amount);
+    }
+    } catch (e) {
+    console.log(e);
   }
-
 }
 
 sellItem(items[2], 1);
