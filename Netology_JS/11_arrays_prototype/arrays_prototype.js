@@ -56,5 +56,39 @@ clients
   .sort(compareByTotalSumm)
   .forEach(client => console.log(client.name));
 
+console.log('\n');
+
+// Task #3
+
+function sendMail(email) {
+  console.log(`Письмо отправлено на адрес ${email}`);
+}
+
+function getSubscribedEmails(list) {
+  let mailList = [];
+  list.filter(function (val) {
+    if (val.isSubscribed) {
+      mailList.push(val.email);
+      return true;
+    }
+  });
+  return mailList;
+}
+
+getSubscribedEmails(clients).forEach(sendMail);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
