@@ -19,9 +19,8 @@ const clients = [{
 // Task #1
 
 clients.findByName = function (name) {
-  return this.find(function (val, i) {
-    if (val.name === name)
-      return val;
+  return this.find(function (val) {
+    return val.name === name;
   });
 
 };
@@ -64,13 +63,23 @@ function sendMail(email) {
   console.log(`Письмо отправлено на адрес ${email}`);
 }
 
+//function getSubscribedEmails(list) {
+//  let mailList = [];
+//  list.forEach(function (val) {
+//    if (val.isSubscribed) {
+//      mailList.push(val.email);
+//    }
+//  });
+//  return mailList;
+//}
+
 function getSubscribedEmails(list) {
   let mailList = [];
-  list.filter(function (val) {
-    if (val.isSubscribed) {
-      mailList.push(val.email);
-      return true;
-    }
+  let trueList = list.filter(function (val) {
+    return val.isSubscribed
+  });
+  trueList.forEach(function (val) {
+    mailList.push(val.email);
   });
   return mailList;
 }
