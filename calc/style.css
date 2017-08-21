@@ -47,6 +47,7 @@ body {
   text-align: right;
   font-size: 25px;
   padding: 5px;
+  margin-bottom: 10px;
 }
 .button {
   width: 50px;
@@ -54,11 +55,8 @@ body {
   margin-bottom: 10px;
   font-size: 25px;
 }
-.buttonBottom {
+.bottom {
   width: 104px;
-  height: 50px;
-  margin-bottom: 10px;
-  font-size: 25px;
 }
 #footer {
   background-color: #434445;

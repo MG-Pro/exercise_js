@@ -4,53 +4,7 @@
   <meta charset = "utf-8">
   <title>Калькулятор</title>
   <link rel = "stylesheet" href = "style.css">
-  <script>
-    var result = 0, operation, custNum, r = 0, r2 = 0;
-    var arrNum = [];
-    function num(custNum) {
-      var x = arrNum.indexOf('.') // нет . -> x=-1
-      if (custNum == '.') {
-        if (x == -1)
-          arrNum.push(custNum);
-      } else
-        arrNum.push(custNum);
-      r = parseFloat(arrNum.join(''));
-      document.getElementById('result').setAttribute("value", arrNum.join(''));
-    }
 
-    function operat(custOperation) {
-      operation = custOperation;
-      r2 = r;
-      r = 0;
-      arrNum = [];
-    }
-
-    function res() {
-      if (r != 0 && r2 != 0) {
-        if (operation == "plus")
-          result = r2 + r;
-        else if (operation == "minus")
-          result = r2 - r;
-        else if (operation == "mult")
-          result = r2 * r;
-        else if (operation == "divis")
-          result = r2 / r;
-        document.getElementById('result').setAttribute("value", result);
-      }
-    }
-
-    function reset() {
-      arrNum.length = 0;
-      r = 0;
-      r2 = 0;
-      document.getElementById('result').setAttribute("value", r);
-    }
-
-    function Invers() {
-      r = r * -1;
-      document.getElementById('result').setAttribute("value", r);
-    }
-  </script>
 </head>
 <body>
 <div id = "content">
@@ -59,39 +13,38 @@
   </div>
   <h1>Простой калькулятор</h1>
   <div id = "calc">
-    <input class = "result" type = "text" value = "0" readonly id = "result"/>
-    <br>
-    <br>
+    <input class = "result" value = "0" readonly id = "result"/>
     <div>
-      <input class = "button" type = "button" value = "7" onClick = "num(7)"/>
-      <input class = "button" type = "button" value = "8" onClick = "num(8)"/>
-      <input class = "button" type = "button" value = "9" onClick = "num(9)"/>
-      <input class = "button" type = "button" value = "+" onClick = "operat('plus')"/>
+      <button class="button">7</button>
+      <button class="button">8</button>
+      <button class="button">9</button>
+      <button class="button">+</button>
     </div>
     <div>
-      <input class = "button" type = "button" value = "4" onClick = "num(4)"/>
-      <input class = "button" type = "button" value = "5" onClick = "num(5)"/>
-      <input class = "button" type = "button" value = "6" onClick = "num(6)"/>
-      <input class = "button" type = "button" value = "-" onClick = "operat('minus')"/>
+      <button class="button">4</button>
+      <button class="button">5</button>
+      <button class="button">6</button>
+      <button class="button">-</button>
     </div>
     <div>
-      <input class = "button" type = "button" value = "1" onClick = "num(1)"/>
-      <input class = "button" type = "button" value = "2" onClick = "num(2)"/>
-      <input class = "button" type = "button" value = "3" onClick = "num(3)"/>
-      <input class = "button" type = "button" value = "*" onClick = "operat('mult')"/>
+      <button class="button">1</button>
+      <button class="button">2</button>
+      <button class="button">3</button>
+      <button class="button">*</button>
     </div>
     <div>
-      <input class = "button" type = "button" value = "+/-" onClick = "Invers()"/>
-      <input class = "button" type = "button" value = "0" onClick = "num(0)"/>
-      <input class = "button" type = "button" value = "." onClick = "num('.')"/>
-      <input class = "button" type = "button" value = "/" onClick = "operat('divis')"/>
+      <button class="button">+/-</button>
+      <button class="button">0</button>
+      <button class="button">.</button>
+      <button class="button">/</button>
     </div>
     <div>
-      <input class = "buttonBottom" type = "button" value = "C" onClick = "reset()"/>
-      <input class = "buttonBottom" type = "button" value = "=" onClick = "res()"/>
+      <button class="button bottom">C</button>
+      <button class="button bottom">=</button>
     </div>
   </div>
 </div>
 <div id = "footer">Copyright &copy; 2017</div>
+<script src = "calc.js"></script>
 </body>
 </html>
