@@ -22,7 +22,6 @@ clients.findByName = function (name) {
   return this.find(function (val) {
     return val.name === name;
   });
-
 };
 
 const clientOne = clients.findByName('Доктор Джон Зоидберг');
@@ -74,14 +73,13 @@ function sendMail(email) {
 //}
 
 function getSubscribedEmails(list) {
-  let mailList = [];
-  let trueList = list.filter(function (val) {
-    return val.isSubscribed
+  return list
+    .filter(function (val) {
+    return val.isSubscribed;
+  })
+    .map(function (val) {
+    return val.email;
   });
-  trueList.forEach(function (val) {
-    mailList.push(val.email);
-  });
-  return mailList;
 }
 
 getSubscribedEmails(clients).forEach(sendMail);
