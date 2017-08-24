@@ -1,5 +1,5 @@
 'use strict';
-let result = 0, operation, r = 0, r2 = 0;
+let result = 0, operation, r = null, r2 = null;
 let arrNum = [];
 let resultElem = document.getElementById('result');
 
@@ -19,12 +19,13 @@ function operat(custOperation) {
     reset();
   else if (custOperation === '+/-')
     invers();
-  else {
-
+  else if (custOperation !== '=') {
+    operation = custOperation;
     r2 = r;
-    r = 0;
+    r = null;
     arrNum = [];
-    res(custOperation);
+  } else {
+    res(operation);
   }
 }
 
@@ -64,5 +65,4 @@ document.getElementById('calc').addEventListener('click', function (e) {
   } else {
     operat(elemVal);
   }
-
 });
