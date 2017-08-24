@@ -54,10 +54,19 @@ function invers() {
   r = r * -1;
   resultElem.value = r;
 }
-
-document.getElementById('calc').addEventListener('click', function (e) {
-  let elem = e.target;
-  let elemVal = elem.innerText;
+function buttonAction(e) {
+  let elemVal;
+  if(e.type === 'keydown') {
+    console.log(e.key);
+    elemVal = e.key;
+    if(elemVal === 'Enter')
+      elemVal = '=';
+    if(elemVal === 'Escape')
+      elemVal = 'C';
+  } else {
+    let elem = e.target;
+    elemVal = elem.innerText;
+  }
   if (parseInt(elemVal) || parseInt(elemVal) === 0) {
     num(parseInt(elemVal));
   } else if (elemVal === '.') {
@@ -65,4 +74,6 @@ document.getElementById('calc').addEventListener('click', function (e) {
   } else {
     operat(elemVal);
   }
-});
+}
+document.getElementById('calc').addEventListener('click', buttonAction);
+document.addEventListener('keydown', buttonAction);
