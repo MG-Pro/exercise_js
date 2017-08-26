@@ -30,7 +30,7 @@ function operat(custOperation) {
 }
 
 function res(operation) {
-  if (r !== 0 && r2 !== 0) {
+  if (r && r2) {
     if (operation === "+")
       result = r2 + r;
     else if (operation === "-")
@@ -54,6 +54,20 @@ function invers() {
   r = r * -1;
   resultElem.value = r;
 }
+
+function pseudoActive(val) {
+  let buttonsList = document.getElementsByClassName('button');
+  for (let key of buttonsList) {
+    if (key.innerText === val) {
+      key.classList.toggle('active');
+      setTimeout(function () {
+        key.classList.toggle('active');
+      }, 150);
+      break;
+    }
+  }
+}
+
 function buttonAction(e) {
   let elemVal;
   if(e.type === 'keydown') {
@@ -63,6 +77,7 @@ function buttonAction(e) {
       elemVal = '=';
     if(elemVal === 'Escape')
       elemVal = 'C';
+    pseudoActive(elemVal);
   } else {
     let elem = e.target;
     elemVal = elem.innerText;

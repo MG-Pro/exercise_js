@@ -3,12 +3,19 @@
   padding: 0;
   box-sizing: border-box;
 }
+html {
+  height: 100%;
+}
 body {
   background-color: #fff;
   font-family: sans-serif;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 .wrap {
   text-align: center;
+  flex: 1 0 auto;
 }
 .header {
   border-bottom: 3px solid #46bab5;
@@ -33,8 +40,7 @@ h1 {
   color: #46bab5;
   font-size: 40px;
   font-weight: 300;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin: 30px 0;
 }
 .row {
   font-size: 0;
@@ -64,8 +70,10 @@ h1 {
   background-color: #46bab5;
   color: #ffffff;
 }
+.active,
 .button:active {
   background-color: #3e9792;
+  color: #ffffff;
 }
 .bottom {
   width: 150px;
@@ -77,4 +85,27 @@ h1 {
   font-size: 20px;
   padding: 50px 0;
   border-top: 3px solid #46bab5;
+  flex: 0 0 auto;
+}
+@media screen and (max-width: 374px) {
+  .button {
+    width: 60px;
+    height: 60px;
+  }
+  .bottom {
+    width: 130px;
+  }
+  .result {
+    width: 270px;
+  }
+  .footer {
+    padding: 10px 0;
+  }
+  h1 {
+    margin: 10px 0;
+    font-size: 33px;
+  }
+  .calc {
+    margin: 10px auto;
+  }
 }
