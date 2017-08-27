@@ -1,9 +1,12 @@
-function Ball(size, posX, posY, color) {
-  var sizePx = size + 'px';
+'use strict';
+
+function Ball(color, size = 20, posX = 0, posY = 0) {
+  let sizePx = size + 'px';
   this.posX = posX + 'px';
   this.posY = posY + 'px';
-  var self = this;
-  var posCount = 0;
+  let self = this;
+  let posCount = 0;
+  let revers = 1;
 
   this.ball = document.createElement('div');
   this.ball.classList.add('ball');
@@ -18,31 +21,40 @@ function Ball(size, posX, posY, color) {
   document.body.appendChild(this.ball);
   this.move = function (angle) {
 
-    if(!this.angle) {
+    if (!this.angle) {
       angle = angle * Math.PI / 180;
       this.angle = angle;
     }
-    var posXend = window.innerWidth - size;
-    var posYend = window.innerHeight - size;
+    let posXend = window.innerWidth - size;
+    let posYend = window.innerHeight - size;
 
 
-    var id = setInterval(function () {
-      posX = (parseFloat (self.posX) + posCount * Math.cos(self.angle));
-      posY = (parseFloat (self.posY) + posCount * Math.sin(self.angle));
+    let id = setInterval(function () {
+      posX = (parseFloat(self.posX) + posCount * Math.cos(self.angle));
+      posY = (parseFloat(self.posY) + posCount * Math.sin(self.angle));
       posCount++;
-      
+
       if (posX >= posXend || posY >= posYend) {
-        self.angle = self.angle + Math.PI / 8;
+
+        self.angle = Math.PI * revers - self.angle;
+        let a = self.angle * 180 / Math.PI;
+        console.log(a);
         posCount = 0;
         self.posX = posX - 1;
         self.posY = posY - 1;
+        if(revers === 1)
+          revers = 2;
       }
-      if(posX < 0 || posY < 0) {
-        self.angle = self.angle + Math.PI / 8;
+      if (posX < 0 || posY < 0) {
+
+        self.angle = Math.PI * revers - self.angle;
         posCount = 0;
         self.posX = posX + 1;
         self.posY = posY + 1;
+        if(revers === 1)
+          revers = 2;
       }
+
       self.ball.style.left = posX + 'px';
       self.ball.style.top = posY + 'px';
 
@@ -52,17 +64,17 @@ function Ball(size, posX, posY, color) {
 
 }
 
-var item = new Ball(20, 0, 0, 'green');
+let item = new Ball('green');
 item.move(10);
 
-var item2 = new Ball(30, 0, 0, 'red');
-item2.move(20);
-
-var item3 = new Ball(30, 0, 0, 'blue');
-item3.move(50);
-
-var item4 = new Ball(30, 0, 0, 'grey');
-item4.move(80);
-
-var item5 = new Ball(30, 0, 0, 'brown');
-item5.move(45);
+//let item2 = new Ball(30, 0, 0, 'red');
+//item2.move(20);
+//
+//let item3 = new Ball(30, 0, 0, 'blue');
+//item3.move(50);
+//
+//let item4 = new Ball(30, 0, 0, 'grey');
+//item4.move(80);
+//
+//let item5 = new Ball(30, 0, 0, 'brown');
+//item5.move(45);

@@ -70,12 +70,12 @@ function pseudoActive(val) {
 
 function buttonAction(e) {
   let elemVal;
-  if(e.type === 'keydown') {
+  if (e.type === 'keydown') {
     console.log(e.key);
     elemVal = e.key;
-    if(elemVal === 'Enter')
+    if (elemVal === 'Enter')
       elemVal = '=';
-    if(elemVal === 'Escape')
+    if (elemVal === 'Escape')
       elemVal = 'C';
     pseudoActive(elemVal);
   } else {
@@ -90,5 +90,6 @@ function buttonAction(e) {
     operat(elemVal);
   }
 }
+
 document.getElementById('calc').addEventListener('click', buttonAction);
 document.addEventListener('keydown', buttonAction);
