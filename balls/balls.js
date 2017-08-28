@@ -7,6 +7,7 @@ function Ball(color, size = 20, posX = 0, posY = 0) {
   let self = this;
   let posCount = 0;
   let revers = 1;
+  let revers2 = 1;
 
   this.ball = document.createElement('div');
   this.ball.classList.add('ball');
@@ -38,21 +39,27 @@ function Ball(color, size = 20, posX = 0, posY = 0) {
 
         self.angle = Math.PI * revers - self.angle;
         let a = self.angle * 180 / Math.PI;
-        console.log(a);
+        console.log(a, revers2);
         posCount = 0;
         self.posX = posX - 1;
         self.posY = posY - 1;
         if(revers === 1)
           revers = 2;
+        else
+          revers = 1;
       }
       if (posX < 0 || posY < 0) {
 
-        self.angle = Math.PI * revers - self.angle;
+        self.angle = Math.PI * revers2 - self.angle;
+        let a = self.angle * 180 / Math.PI;
+        console.log(a, revers2);
         posCount = 0;
         self.posX = posX + 1;
         self.posY = posY + 1;
-        if(revers === 1)
-          revers = 2;
+        if(revers2 === 1)
+          revers2 = 2;
+        else
+          revers2 = 1;
       }
 
       self.ball.style.left = posX + 'px';
