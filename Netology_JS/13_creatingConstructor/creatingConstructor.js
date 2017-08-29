@@ -13,3 +13,25 @@ const pointsInfo = [
   {title: 'Седьмое кольцо Юпитера', coords: [934, -491, 712]},
   {title: 'Саратов', coords: [30, 91, 77]}
 ];
+
+// Task #1
+
+class OrdersTeleportationPoint {
+  constructor(title, x, y, z) {
+    this.title = title;
+    this.x = x;
+    this.y = y;
+    this.z = z;
+  }
+  getDistance(x, y, z) {
+      return Math.sqrt(Math.pow((x - this.x), 2) + Math.pow((y - this.y), 2) + Math.pow((z - this.z), 2));
+  }
+
+}
+
+const point = new OrdersTeleportationPoint('Темная сторона Луны', 500, 200, 97);
+let distance = point.getDistance(100, -100, 33);
+console.log(`Расстояние до пункта «${point.title}» составит ${distance.toFixed(0)} единиц`);
+
+
+
