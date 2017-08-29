@@ -23,8 +23,9 @@ class OrdersTeleportationPoint {
     this.y = y;
     this.z = z;
   }
+
   getDistance(x, y, z) {
-      return Math.sqrt(Math.pow((x - this.x), 2) + Math.pow((y - this.y), 2) + Math.pow((z - this.z), 2));
+    return Math.sqrt(Math.pow((x - this.x), 2) + Math.pow((y - this.y), 2) + Math.pow((z - this.z), 2));
   }
 
 }
@@ -33,5 +34,25 @@ const point = new OrdersTeleportationPoint('Темная сторона Луны
 let distance = point.getDistance(100, -100, 33);
 console.log(`Расстояние до пункта «${point.title}» составит ${distance.toFixed(0)} единиц`);
 
+// Task #3
 
+class OrdersTeleportationPointLocator {
+  constructor(point) {
+    try {
 
+    } catch (e) {
+
+    }
+  }
+
+}
+
+OrdersTeleportationPointLocator.prototype = function getClosest(x, y, z) {
+
+};
+
+const points = pointsInfo.map(point => new OrdersTeleportationPoint(point.title, ...point.coords));
+const locator = new OrdersTeleportationPointLocator(points);
+
+const closestPoint = locator.getClosest(333, 294, 77);
+console.log(`Ближайший пункт телепортации заказов «${closestPoint.title}»`);
