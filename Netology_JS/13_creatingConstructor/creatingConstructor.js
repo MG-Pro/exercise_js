@@ -34,22 +34,30 @@ const point = new OrdersTeleportationPoint('Темная сторона Луны
 let distance = point.getDistance(100, -100, 33);
 console.log(`Расстояние до пункта «${point.title}» составит ${distance.toFixed(0)} единиц`);
 
-// Task #3
+// Task #2
 
 class OrdersTeleportationPointLocator {
-  constructor(point) {
+  constructor(list) {
     try {
-
+      if (!(list instanceof Array))
+        throw new Error('Это не массив');
+      for (let val of list) {
+        if(val instanceof OrdersTeleportationPoint) {
+          this.point = val;
+          return val;
+        }
+      }
+      return points;
     } catch (e) {
-
+      console.log(e.message);
     }
   }
-
+  getClosest  (x, y, z) {
+    return;
+  };
 }
 
-OrdersTeleportationPointLocator.prototype = function getClosest(x, y, z) {
-
-};
+//OrdersTeleportationPointLocator.prototype.
 
 const points = pointsInfo.map(point => new OrdersTeleportationPoint(point.title, ...point.coords));
 const locator = new OrdersTeleportationPointLocator(points);
