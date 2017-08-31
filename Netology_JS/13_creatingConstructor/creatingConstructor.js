@@ -41,23 +41,22 @@ class OrdersTeleportationPointLocator {
     try {
       if (!(list instanceof Array))
         throw new Error('Это не массив');
+
       for (let val of list) {
         if(val instanceof OrdersTeleportationPoint) {
           this.point = val;
-          return val;
         }
       }
-      return points;
+
     } catch (e) {
       console.log(e.message);
     }
   }
-  getClosest  (x, y, z) {
-    return;
-  };
 }
 
-//OrdersTeleportationPointLocator.prototype.
+OrdersTeleportationPointLocator.prototype.getClosest = function (x, y, z) {
+  console.log(x);
+};
 
 const points = pointsInfo.map(point => new OrdersTeleportationPoint(point.title, ...point.coords));
 const locator = new OrdersTeleportationPointLocator(points);
