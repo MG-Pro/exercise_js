@@ -42,12 +42,12 @@ class OrdersTeleportationPointLocator {
       if (!(list instanceof Array))
         throw new Error('Это не массив');
 
-      for (let val of list) {
-        if(val instanceof OrdersTeleportationPoint) {
-          this.point = val;
-        }
-      }
 
+      this.points = list.filter(function (val) {
+        if(val instanceof OrdersTeleportationPoint) {
+          return val;
+        }
+      });
     } catch (e) {
       console.log(e.message);
     }
@@ -55,7 +55,16 @@ class OrdersTeleportationPointLocator {
 }
 
 OrdersTeleportationPointLocator.prototype.getClosest = function (x, y, z) {
-  console.log(x);
+  let minDistance = Infinity;
+  let minDistancePoint;
+  for (let val of this.points){
+    val.distance = val.getDistance(x, y, z);
+    if (val.distance < minDistance ) {
+      minDistance = val.distance;
+      minDistancePoint = val;
+    }
+  }
+  return minDistancePoint;
 };
 
 const points = pointsInfo.map(point => new OrdersTeleportationPoint(point.title, ...point.coords));
