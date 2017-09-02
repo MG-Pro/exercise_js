@@ -72,3 +72,53 @@ const locator = new OrdersTeleportationPointLocator(points);
 
 const closestPoint = locator.getClosest(333, 294, 77);
 console.log(`Ближайший пункт телепортации заказов «${closestPoint.title}»`);
+
+// Task #3
+
+class LoyaltyCard {
+  constructor(name, sum) {
+    this.id = generateId();
+
+  }
+  getFinalSum() {
+
+  }
+
+  append() {
+
+  }
+
+  show() {
+
+  }
+
+}
+
+
+const card = new LoyaltyCard('Иванов Иван', 6300);
+
+let newOrderSum = 7000;
+let finalSum = card.getFinalSum(newOrderSum);
+console.log(`Итоговая сумма для заказа на ${newOrderSum}Q по карте
+  составит ${finalSum}Q. Скидка ${card.discount}%.`);
+
+card.append(newOrderSum);
+console.log(`Баланс карты после покупки ${card.balance}.`);
+card.show();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
