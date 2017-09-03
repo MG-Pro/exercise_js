@@ -83,11 +83,58 @@ function registerNewUser(data) {
 
 // Task #1
 
+class SpaceDate extends Date {
+  copy() {
+    let copy = new this.constructor;
+    copy.setTime(this.getTime());
+    return copy;
+  }
 
+  getNextDate() {
+    let nextDate = this.copy();
+    nextDate.setDate(nextDate.getDate() + 1);
+    return nextDate;
+  }
 
+  getPrevDate() {
+    let prevDate = this.copy();
+    prevDate.setDate(prevDate.getDate() - 1);
+    return prevDate;
+  }
+  getDayBeginning() {
+    let dayBeginning = this.copy();
+    dayBeginning.setHours(0,0,0,0);
+    return dayBeginning;
+  }
+  getDayEnd() {
+    let dayEnd = this.copy();
+    dayEnd.setHours(23,59,59,999);
+    return dayEnd;
+  }
+}
 
+let dateOriginal = new SpaceDate(2017, 1, 22);
+let dateCopy = dateOriginal.copy();
+dateCopy.setYear(2022);
+console.log(`Оригинальная дата: ${dateOriginal.toLocaleDateString('ru-Ru')}`);
+console.log(`Измененная копия: ${dateCopy.toLocaleDateString('ru-Ru')}`);
 
+let orderDate = new SpaceDate(2017, 2, 10);
+let deliveryDate = orderDate.getNextDate();
+console.log(`Дата заказа: ${orderDate.toLocaleDateString('ru-Ru')}`);
+console.log(`Дата доставки: ${deliveryDate.toLocaleDateString('ru-Ru')}`);
 
+let supplyDate = new SpaceDate(2017, 3, 3);
+let requestDate = supplyDate.getPrevDate();
+console.log(`Дата поставки: ${supplyDate.toLocaleDateString('ru-Ru')}`);
+console.log(`Дата заявки поставщику: ${requestDate.toLocaleDateString('ru-Ru')}`);
+
+let someDate = new SpaceDate(2017, 2, 10, 12, 44);
+let from = someDate.getDayBeginning();
+let to = someDate.getDayEnd();
+console.log(`В любое время с ${from.toLocaleString('ru-Ru')} по ${to.toLocaleString('ru-Ru')}`);
+
+// Task #2
 
 
 
