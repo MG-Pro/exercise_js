@@ -44,7 +44,7 @@ class OrdersTeleportationPointLocator {
 
 
       this.points = list.filter(function (val) {
-        if(val instanceof OrdersTeleportationPoint) {
+        if (val instanceof OrdersTeleportationPoint) {
           return val;
         }
       });
@@ -57,9 +57,9 @@ class OrdersTeleportationPointLocator {
 OrdersTeleportationPointLocator.prototype.getClosest = function (x, y, z) {
   let minDistance = Infinity;
   let minDistancePoint;
-  for (let val of this.points){
+  for (let val of this.points) {
     val.distance = val.getDistance(x, y, z);
-    if (val.distance < minDistance ) {
+    if (val.distance < minDistance) {
       minDistance = val.distance;
       minDistancePoint = val;
     }
@@ -77,23 +77,58 @@ console.log(`Ближайший пункт телепортации заказо
 
 class LoyaltyCard {
   constructor(name, sum) {
-    this.id = generateId();
+    if (!this.id) {
+      Object.defineProperty(this, 'id', {
+        get: generateId
+      });
+    }
 
+    this.owner = name;
+    this.orders = [];
+    this.orders.push(sum);
+
+    Object.defineProperty(this, 'balance', {
+      value: sum,
+      writable: false,
+      configurable: true
+    });
   }
-  getFinalSum() {
 
+  get discount() {
+    if (this.balance < 3000)
+      return 0;
+    else if (this.balance < 5000)
+      return 3;
+    else if (this.balance < 10000)
+      return 5;
+    else
+      return 7;
   }
 
-  append() {
+  getFinalSum(newOrderSum) {
+    return newOrderSum - newOrderSum * this.discount / 100;
+  }
 
+  append(newOrderSum) {
+    Object.defineProperties(this, {
+      'balance': {
+        value: this.balance + newOrderSum
+      }
+    });
+    this.orders.push(newOrderSum);
   }
 
   show() {
-
+    console.log(`Карта ${this.id}:
+    \tВладелец: ${this.owner}
+    \tБаланс: ${this.balance}Q
+    \tТекущая скидка: ${this.discount}%
+    \tЗаказы:\n`);
+    this.orders.forEach(function (val, i) {
+      console.log(`\t\t\t#${i} на сумму ${val}Q`);
+    });
   }
-
 }
-
 
 const card = new LoyaltyCard('Иванов Иван', 6300);
 
@@ -103,13 +138,8 @@ console.log(`Итоговая сумма для заказа на ${newOrderSum}
   составит ${finalSum}Q. Скидка ${card.discount}%.`);
 
 card.append(newOrderSum);
-console.log(`Баланс карты после покупки ${card.balance}.`);
+console.log(`Баланс карты после покупки ${card.balance}. Скидка ${card.discount}%.`);
 card.show();
-
-
-
-
-
 
 
 
