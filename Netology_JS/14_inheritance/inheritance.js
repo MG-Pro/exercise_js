@@ -164,7 +164,20 @@ class AllDayExceptHolidaysPaymentTerminal extends PaymentTerminal {
 }
 
 class WorkspacePaymentTerminal extends PaymentTerminal {
+  checkActive() {
 
+    if(calendar.now.getDay() === 0 || calendar.now.getDay() === 6) {
+      return false;
+    }
+    let startTime = new Date(calendar.now);
+    startTime = startTime.setHours(8, 0, 0, 0);
+
+    let endTime = new Date(calendar.now);
+    endTime = endTime.setHours(18, 0, 0, 0);
+
+    if(calendar.now.getTime() > startTime && calendar.now.getTime() < endTime)
+      return true;
+  }
 }
 
 const holidays = [
@@ -195,8 +208,24 @@ showTerminals(new Date(2017, 3 - 1, 11));
 showTerminals(new Date(2017, 3 - 1, 14, 18, 1));
 showTerminals(new Date(2017, 3 - 1, 14, 8, 3));
 
+// Task #3
 
+function handleRegistration(data) {
 
+}
+
+const notValidEmailUser = { email: 'test' };
+handleRegistration(notValidEmailUser);
+
+const notUniqueLoginUser = { email: 'test@test.co', login: 'boss' };
+handleRegistration(notUniqueLoginUser);
+
+const differentPwUser = { email: 'test@test.co', login: 'ivan',
+  password: '123', passwordCopy: '456' };
+handleRegistration(differentPwUser);
+
+const normalUser = { email: 'test@test.co', login: 'ivan', password: '123', passwordCopy: '123' };
+handleRegistration(normalUser);
 
 
 
