@@ -101,14 +101,16 @@ class SpaceDate extends Date {
     prevDate.setDate(prevDate.getDate() - 1);
     return prevDate;
   }
+
   getDayBeginning() {
     let dayBeginning = this.copy();
-    dayBeginning.setHours(0,0,0,0);
+    dayBeginning.setHours(0, 0, 0, 0);
     return dayBeginning;
   }
+
   getDayEnd() {
     let dayEnd = this.copy();
-    dayEnd.setHours(23,59,59,999);
+    dayEnd.setHours(23, 59, 59, 999);
     return dayEnd;
   }
 }
@@ -136,10 +138,62 @@ console.log(`В любое время с ${from.toLocaleString('ru-Ru')} по ${
 
 // Task #2
 
+class AllDayPaymentTerminal extends PaymentTerminal {
+  checkActive() {
+    return true;
+  }
+}
 
+class AllDayExceptHolidaysPaymentTerminal extends PaymentTerminal {
+  constructor(title, calendar, holidays) {
+    super(title, calendar);
+    this.holidays = holidays;
+  }
+  checkActive() {
+    let year = new Date();
+    year = year.getFullYear();
+    return this.holidays.every(function (val) {
+      let holidayDate = new Date(year, val.month, val.date);
+      let holidayDateStart = holidayDate.getTime();
+      let holidayDateEnd = holidayDateStart + 24 * 60 * 60 * 1000;
+      if (!(calendar.now.getTime() >= holidayDateStart && calendar.now.getTime() <= holidayDateEnd)) {
+        return true;
+      }
+    });
+  }
+}
 
+class WorkspacePaymentTerminal extends PaymentTerminal {
 
+}
 
+const holidays = [
+  {date: 11, month: 3 - 1},
+  {date: 23, month: 2 - 1}
+];
+
+const calendar = new Calendar();
+const terminals = [
+  new WorkspacePaymentTerminal('Терминал в офисе Убербанка', calendar),
+  new AllDayPaymentTerminal('Терминал в аэропорту', calendar),
+  new AllDayExceptHolidaysPaymentTerminal('Терминал в торговом центре',
+    calendar, holidays)
+];
+
+function showTerminals(date) {
+  if (date !== undefined) {
+    calendar.setDate(date);
+  }
+  console.log('\n' + calendar.today);
+  terminals
+    .filter(terminal => terminal instanceof PaymentTerminal)
+    .forEach(terminal => console.log(`${terminal.title} ${terminal.status}`));
+}
+
+showTerminals(new Date(2017, 2 - 1, 23));
+showTerminals(new Date(2017, 3 - 1, 11));
+showTerminals(new Date(2017, 3 - 1, 14, 18, 1));
+showTerminals(new Date(2017, 3 - 1, 14, 8, 3));
 
 
 
