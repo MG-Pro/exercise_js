@@ -210,8 +210,21 @@ showTerminals(new Date(2017, 3 - 1, 14, 8, 3));
 
 // Task #3
 
-function handleRegistration(data) {
+console.log(`\n`);
 
+function handleRegistration(data) {
+  try {
+    registerNewUser(data);
+    console.log(`Пользователь успешно зарегистрирован`);
+  } catch (e) {
+    if (e instanceof NotValidEmailRegistrationError) {
+      console.log(`"${e.email}" не является адресом электронной почты`);
+    } else if (e instanceof NotUniqueRegistrationError) {
+      console.log(`Пользователь с логином "${e.value}" уже зарегистрирован`);
+    } else if (e instanceof NotSameRegistrationError) {
+      console.log(`Введенные пароли не совпадают`);
+    }
+  }
 }
 
 const notValidEmailUser = { email: 'test' };
