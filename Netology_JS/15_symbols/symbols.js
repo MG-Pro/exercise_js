@@ -34,3 +34,52 @@ console.log(generator.create());
 
 delete generator[BarcodeGenerator.prefix];
 console.log(generator.create());
+
+// Task #2
+
+class HexRange {
+  constructor(from, to) {
+    this.from = from;
+    this.to = to;
+    this.queue = [];
+
+  }
+
+  [Symbol.iterator]() {
+    let self = this;
+    return {
+      next() {
+        if (self.from <= self.to) {
+          return {
+            done: false,
+            value: self.from++
+          };
+        } else {
+          return {
+            done: true
+          };
+        }
+      }
+    }
+  };
+}
+
+
+let queue = new HexRange(247, 253);
+console.log(...queue);
+
+
+//return {
+//  next() {
+//    let item = self.queue[curItem++];
+//    return {
+//      done: curItem > self.queue.length,
+//      value: item
+//    }
+//  }
+//}
+
+
+
+
+
