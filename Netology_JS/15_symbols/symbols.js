@@ -41,10 +41,7 @@ class HexRange {
   constructor(from, to) {
     this.from = from;
     this.to = to;
-    this.queue = [];
-
   }
-
   [Symbol.iterator]() {
     let self = this;
     return {
@@ -52,7 +49,7 @@ class HexRange {
         if (self.from <= self.to) {
           return {
             done: false,
-            value: self.from++
+            value: (self.from++).toString(16)
           };
         } else {
           return {
@@ -61,23 +58,13 @@ class HexRange {
         }
       }
     }
-  };
+  }
 }
-
 
 let queue = new HexRange(247, 253);
 console.log(...queue);
 
-
-//return {
-//  next() {
-//    let item = self.queue[curItem++];
-//    return {
-//      done: curItem > self.queue.length,
-//      value: item
-//    }
-//  }
-//}
+// Task #3
 
 
 
