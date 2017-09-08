@@ -7,19 +7,20 @@ class BarcodeGenerator {
     this.size = size;
     BarcodeGenerator.prefix = Symbol('prefix')
   }
+  
   create() {
     let code = [];
     for (let i = 0; i < this.size; i++) {
       code.push(Math.floor(Math.random() * (9 - 1)) + 1);
     }
     this.code = code.join('');
-    if(this[BarcodeGenerator.prefix]) {
+    if (this[BarcodeGenerator.prefix]) {
       console.log(`${this[BarcodeGenerator.prefix]}-${this.code}`);
     } else {
       console.log(this.code);
     }
   }
-
+  
 }
 
 const generator = new BarcodeGenerator(4);
@@ -42,6 +43,7 @@ class HexRange {
     this.from = from;
     this.to = to;
   }
+  
   [Symbol.iterator]() {
     let self = this;
     return {
@@ -66,6 +68,42 @@ console.log(...queue);
 
 // Task #3
 
+class DateRange {
+  constructor(from, to) {
+    this.from = from;
+    this.to = to;
+    
+    
+    if(calendar.now.getDay() === 0 || calendar.now.getDay() === 6) {
+      return false;
+    }
+  }
+  [Symbol.iterator]() {
+    let self = this;
+    return {
+      next() {
+        if (self.from <= self.to) {
+          return {
+            done: false,
+            value: self.from++
+          };
+        } else {
+          return {
+            done: true
+          };
+        }
+      }
+    }
+  }
+}
+
+const from = new Date(2017, 2, 13, 23, 59);
+const to = new Date(2017, 2, 21, 0, 1);
+let range = new DateRange(from, to);
+
+for (let day of range) {
+  console.log(day.toLocaleDateString('ru-Ru'));
+}
 
 
 
