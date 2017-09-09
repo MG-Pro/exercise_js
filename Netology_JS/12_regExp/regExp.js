@@ -3,7 +3,7 @@
 // Task #1
 
 function checkCoupon(code) {
-  let regexp = /[^\d\a-z]/gi;
+  const regexp = /[^\da-z]/gi;
   code = code.toLowerCase().replace(regexp, '');
   let revCode = code.split('').reverse().join('');
   return code.length >= 10 && code === revCode;
@@ -39,13 +39,14 @@ for (let text of texts) {
 }
 
 // Task #3
+const regexp = {
+  email: /^[\w-\.]+@\w+\.{1}\w+/gi,
+  phone: /^\+{1}7\d{10}$/gi
+};
 
 function validate(name, rule) {
-  let regexp = {
-    email: /^[\w-\.]+@\w+\.{1}\w+/gi,
-    phone: /^\+{1}7\d{10}$/gi
-  };
-  return rule.every(function (val) {
+  let ruleTemp = rule.slice();
+  return ruleTemp.every(val => {
     if(typeof val.rule === 'string') {
       val.rule = regexp[val.name];
     }
@@ -72,7 +73,7 @@ for (let form of forms) {
     console.log('Форма заполнена неверно');
   }
 }
-
+console.log(fields);
 
 
 

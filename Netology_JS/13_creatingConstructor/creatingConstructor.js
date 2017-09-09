@@ -38,19 +38,13 @@ console.log(`Расстояние до пункта «${point.title}» сост�
 
 class OrdersTeleportationPointLocator {
   constructor(list) {
-    try {
-      if (!(list instanceof Array))
-        throw new Error('Это не массив');
-
-
-      this.points = list.filter(function (val) {
-        if (val instanceof OrdersTeleportationPoint) {
-          return val;
-        }
-      });
-    } catch (e) {
-      console.log(e.message);
-    }
+    if (!(list instanceof Array))
+      throw new Error('Это не массив');
+    this.points = list.filter(function (val) {
+      if (val instanceof OrdersTeleportationPoint) {
+        return val;
+      }
+    });
   }
 }
 
