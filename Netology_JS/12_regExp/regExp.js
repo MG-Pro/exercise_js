@@ -48,7 +48,8 @@ function validate(name, rule) {
   let ruleTemp = rule.slice();
   return ruleTemp.every(val => {
     if(typeof val.rule === 'string') {
-      val.rule = regexp[val.name];
+      return val.rule.test(name[val.name]);
+    //  val.rule = regexp[val.name];
     }
     return val.rule.test(name[val.name]);
   });
