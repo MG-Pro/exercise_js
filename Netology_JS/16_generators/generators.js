@@ -93,13 +93,13 @@ function* numberQuiz(number) {
   let num = yield `Назовите число:`;
   while (true) {
     if (number < num) {
-      num = yield `Меньше чем ` + num;
+      num = yield `Меньше чем ${num}!`;
     }
     if (number > num) {
-      num = yield `Больше чем ` + num;
+      num = yield `Больше чем ${num}!`;
     }
     if (number === num) {
-      return `Вы угадали, это ` + num;
+      return `Вы угадали, это ${num}!`;
     }
   }
 }
@@ -113,9 +113,31 @@ do {
   attempt = attempts.shift();
 } while (!result.done);
 
+// Task #3
 
+class TruckPlanner {
+  constructor(weightLimit) {
+    this.weightLimit = weightLimit;
+    this.weighLevel = 0;
+  }
+  add(order) {
+    let truck = new Truck();
+    this.weighLevel += order.weight;
+  }
 
+}
 
+const planner = new TruckPlanner(10);
+planner.add(new Order(1, 2));
+planner.add(new Order(2, 5));
+planner.add(new Order(3, 4));
+planner.add(new Order(4, 4));
+planner.add(new Order(5, 1));
+planner.add(new Order(6, 2));
+
+for (const truck of planner) {
+  truck.show();
+}
 
 
 
