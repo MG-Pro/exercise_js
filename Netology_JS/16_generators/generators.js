@@ -69,9 +69,23 @@ class Truck extends Array {
 
 // Task #1
 
+function* palette(amount) {
+  let hue = Math.random();
+  let saturation = Math.random();
+  let lightness = Math.random();
+  let step = 1 / amount;
 
+  for (let i = 0; i < amount; i++) {
+    hue += step;
+    if (hue > 1)
+      hue -= 1;
+    yield hslToRgb(hue, saturation, lightness);
+  }
+}
 
-
+for (const color of palette(3)) {
+  console.log(color);
+}
 
 
 
