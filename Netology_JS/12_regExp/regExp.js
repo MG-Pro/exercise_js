@@ -45,11 +45,9 @@ const regexp = {
 };
 
 function validate(name, rule) {
-  let ruleTemp = rule.slice();
-  return ruleTemp.every(val => {
+  return rule.every(val => {
     if(typeof val.rule === 'string') {
-      return val.rule.test(name[val.name]);
-    //  val.rule = regexp[val.name];
+      return regexp[val.name].test(name[val.name]);
     }
     return val.rule.test(name[val.name]);
   });
