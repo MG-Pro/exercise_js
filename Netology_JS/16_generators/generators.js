@@ -87,9 +87,31 @@ for (const color of palette(3)) {
   console.log(color);
 }
 
+// Task #2
 
+function* numberQuiz(number) {
+  let num = yield `Назовите число:`;
+  while (true) {
+    if (number < num) {
+      num = yield `Меньше чем ` + num;
+    }
+    if (number > num) {
+      num = yield `Больше чем ` + num;
+    }
+    if (number === num) {
+      return `Вы угадали, это ` + num;
+    }
+  }
+}
 
-
+const attempts = [7, 4, 6, 10, 2, 9, 5];
+const quiz = numberQuiz(5);
+let attempt, result;
+do {
+  result = quiz.next(attempt);
+  console.log(result.value);
+  attempt = attempts.shift();
+} while (!result.done);
 
 
 
