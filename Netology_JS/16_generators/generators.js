@@ -121,34 +121,21 @@ class TruckPlanner {
     this.trucks = [];
 
   }
+
   add(order) {
-    if (this.trucks.length) {
+    if (!this.trucks.length) {
       this.trucks.push(new Truck(this.trucks.length + 1, this.weightLimit))
     }
-   
-    truck.add(order)
-   
+    if (!this.trucks[this.trucks.length - 1].add(order)) {
+      this.trucks.push(new Truck(this.trucks.length + 1, this.weightLimit));
+      this.trucks[this.trucks.length - 1].add(order);
+    }
   }
 
-  [Symbol.iterator]() {
-    let self = this;
+  *[Symbol.iterator]() {
     let i = 0;
-    yield {
-
-
-      next() {
-        if () {
-          i++;
-          return {
-            done: false,
-            value:
-          };
-        } else {
-          return {
-            done: true
-          };
-        }
-      }
+    while (i < this.trucks.length) {
+      yield this.trucks[i++];
     }
   }
 }
@@ -164,10 +151,5 @@ planner.add(new Order(6, 2));
 for (const truck of planner) {
   truck.show();
 }
-
-
-
-
-
 
 
