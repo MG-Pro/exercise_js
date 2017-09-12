@@ -118,26 +118,27 @@ do {
 class TruckPlanner {
   constructor(weightLimit) {
     this.weightLimit = weightLimit;
-
+    this.trucks = [];
 
   }
   add(order) {
-
-    let truck = new Truck(this.orderCount, this.weightLimit);
-    if(truck.add(order)) {
-      this[Symbol('Truck')] = truck;
+    if (this.trucks.length) {
+      this.trucks.push(new Truck(this.trucks.length + 1, this.weightLimit))
     }
-
+   
+    truck.add(order)
+   
   }
 
   [Symbol.iterator]() {
     let self = this;
-    return {
+    let i = 0;
+    yield {
 
 
       next() {
         if () {
-
+          i++;
           return {
             done: false,
             value:
