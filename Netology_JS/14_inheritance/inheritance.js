@@ -85,9 +85,7 @@ function registerNewUser(data) {
 
 class SpaceDate extends Date {
   copy() {
-    let copy = new this.constructor;
-    copy.setTime(this.getTime());
-    return copy;
+    return new SpaceDate(this);
   }
 
   getNextDate() {
@@ -153,10 +151,13 @@ class AllDayExceptHolidaysPaymentTerminal extends PaymentTerminal {
     let year = new Date();
     year = year.getFullYear();
     return this.holidays.every(function (val) {
-      let holidayDate = new Date(year, val.month, val.date);
-      let holidayDateStart = holidayDate.getTime();
-      let holidayDateEnd = holidayDateStart + 24 * 60 * 60 * 1000;
-      if (!(calendar.now.getTime() >= holidayDateStart && calendar.now.getTime() <= holidayDateEnd)) {
+//      let holidayDate = new Date(year, val.month, val.date);
+//      let holidayDateStart = holidayDate.getTime();
+//      let holidayDateEnd = holidayDateStart + 24 * 60 * 60 * 1000;
+//      if (!(calendar.now.getTime() >= holidayDateStart && calendar.now.getTime() <= holidayDateEnd)) {
+//        return true;
+//      }
+      if (!(calendar.now.getDate() >= val.date && calendar.now.getMonth() <= val.month)) {
         return true;
       }
     });
@@ -169,14 +170,16 @@ class WorkspacePaymentTerminal extends PaymentTerminal {
     if(calendar.now.getDay() === 0 || calendar.now.getDay() === 6) {
       return false;
     }
-    let startTime = new Date(calendar.now);
-    startTime = startTime.setHours(8, 0, 0, 0);
-
-    let endTime = new Date(calendar.now);
-    endTime = endTime.setHours(18, 0, 0, 0);
-
-    if(calendar.now.getTime() > startTime && calendar.now.getTime() < endTime)
-      return true;
+//    let startTime = new Date(calendar.now);
+//    startTime = startTime.setHours(8, 0, 0, 0);
+//
+//    let endTime = new Date(calendar.now);
+//    endTime = endTime.setHours(18, 0, 0, 0);
+//
+//    if(calendar.now.getTime() > startTime && calendar.now.getTime() < endTime)
+//      return true;
+  if(calendar.now.getHours()  > 8 && calendar.now.getHours()  < 18)
+    return true;
   }
 }
 
