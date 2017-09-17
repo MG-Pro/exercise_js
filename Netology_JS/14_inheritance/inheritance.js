@@ -147,17 +147,10 @@ class AllDayExceptHolidaysPaymentTerminal extends PaymentTerminal {
     super(title, calendar);
     this.holidays = holidays;
   }
+
   checkActive() {
-    let year = new Date();
-    year = year.getFullYear();
     return this.holidays.every(function (val) {
-//      let holidayDate = new Date(year, val.month, val.date);
-//      let holidayDateStart = holidayDate.getTime();
-//      let holidayDateEnd = holidayDateStart + 24 * 60 * 60 * 1000;
-//      if (!(calendar.now.getTime() >= holidayDateStart && calendar.now.getTime() <= holidayDateEnd)) {
-//        return true;
-//      }
-      if (!(calendar.now.getDate() >= val.date && calendar.now.getMonth() <= val.month)) {
+      if (!(calendar.now.getDate() === val.date && calendar.now.getMonth() === val.month)) {
         return true;
       }
     });
@@ -167,19 +160,11 @@ class AllDayExceptHolidaysPaymentTerminal extends PaymentTerminal {
 class WorkspacePaymentTerminal extends PaymentTerminal {
   checkActive() {
 
-    if(calendar.now.getDay() === 0 || calendar.now.getDay() === 6) {
+    if (calendar.now.getDay() === 0 || calendar.now.getDay() === 6) {
       return false;
     }
-//    let startTime = new Date(calendar.now);
-//    startTime = startTime.setHours(8, 0, 0, 0);
-//
-//    let endTime = new Date(calendar.now);
-//    endTime = endTime.setHours(18, 0, 0, 0);
-//
-//    if(calendar.now.getTime() > startTime && calendar.now.getTime() < endTime)
-//      return true;
-  if(calendar.now.getHours()  > 8 && calendar.now.getHours()  < 18)
-    return true;
+    if (calendar.now.getHours() > 8 && calendar.now.getHours() < 18)
+      return true;
   }
 }
 
@@ -230,17 +215,19 @@ function handleRegistration(data) {
   }
 }
 
-const notValidEmailUser = { email: 'test' };
+const notValidEmailUser = {email: 'test'};
 handleRegistration(notValidEmailUser);
 
-const notUniqueLoginUser = { email: 'test@test.co', login: 'boss' };
+const notUniqueLoginUser = {email: 'test@test.co', login: 'boss'};
 handleRegistration(notUniqueLoginUser);
 
-const differentPwUser = { email: 'test@test.co', login: 'ivan',
-  password: '123', passwordCopy: '456' };
+const differentPwUser = {
+  email: 'test@test.co', login: 'ivan',
+  password: '123', passwordCopy: '456'
+};
 handleRegistration(differentPwUser);
 
-const normalUser = { email: 'test@test.co', login: 'ivan', password: '123', passwordCopy: '123' };
+const normalUser = {email: 'test@test.co', login: 'ivan', password: '123', passwordCopy: '123'};
 handleRegistration(normalUser);
 
 
