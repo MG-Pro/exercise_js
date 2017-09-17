@@ -148,6 +148,28 @@ getTagItemsCountAsync(tagTitle, (err, count) => {
   console.log(`По тегу #${tagTitle} найдено товаров ${count} шт.`);
 });
 
+// Task #4
+
+function getTagItemsCount(title) {
+  getTag(title)
+    .then(tag => {
+      let res = getTagItems(tag.id);
+      console.log(res);
+
+
+    })
+    .catch(err => {
+      console.log(err);
+    });
+}
+
+getTagItemsCount(tagTitle)
+  .then(count => console.log(`По тегу #${tagTitle} найдено товаров ${count} шт.`))
+  .catch(err => console.error(err));
+
+
+
+
 
 
 
