@@ -118,9 +118,35 @@ convertCurrency(amount, 'XXX', 'USD')
 
 // Task 3
 
+function getTagItemsCountAsync(title, callback) {
+  let promise = new Promise((resolve, reject) => {
+    getTagAsync(title, (status, tag) => {
+      if (!status)
+        resolve(tag);
+      else
+        reject(new Error(tag));
+    });
+  })
+    .then((val) => {
+      getTagItemsAsync(val.id, (error, list) => {
+        if (error) {
+          throw error;
+        } else {
+          callback(null, list.length);
+        }
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
 
-
-
+getTagItemsCountAsync(tagTitle, (err, count) => {
+  if (err) {
+    return console.error(err);
+  }
+  console.log(`По тегу #${tagTitle} найдено товаров ${count} шт.`);
+});
 
 
 
