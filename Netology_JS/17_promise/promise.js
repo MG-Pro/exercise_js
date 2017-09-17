@@ -68,11 +68,11 @@ const tagTitle = 'гаджеты';
 // Task #1
 
 function showTagInfo(tag) {
-  getTagItemsAsync(tag.id, function (error, list) {
+  getTagItemsAsync(tag.id, (error, list) => {
     if (error) {
-      console.log(error);
+      console.error(error);
     } else {
-      console.log(`Товары по тегу #${tag.title}`);
+      console.log(`Товары по тегу #${tag.title}:`);
       list.forEach(val => {
         console.log(`* ${val.title}: ${val.price}Q`);
       });
@@ -83,10 +83,39 @@ function showTagInfo(tag) {
 tags.forEach(showTagInfo);
 showTagInfo(badTag);
 
+// Task #2
 
+function getCurrencyRate(code) {
+  return new Promise((resolve, reject) => {
+    getCurrencyRateAsync(code, (error, rate) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(rate);
+      }
+    });
+  });
+}
 
+function convertCurrency(amount, ...arg) {
+  let promises = [];
+  arg.forEach(function (val) {
+    promises.push(getCurrencyRate(val));
+  });
+  return Promise.all(promises)
+    .then((promises) => {
+      return Math.round(amount * promises[1] / promises[0]);
+    });
+}
 
+const amount = 42;
+convertCurrency(amount, 'ZZZ', 'USD')
+  .then(result => console.log(`${amount}Q = $${result}`))
+  .catch(err => console.error(err));
 
+convertCurrency(amount, 'XXX', 'USD')
+  .then(result => console.log(`${amount}X = $${result}`))
+  .catch(err => console.error(err));
 
 
 
