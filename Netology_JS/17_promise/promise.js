@@ -65,14 +65,23 @@ const tags = [
 const badTag = {id: 54, title: 'ошибка'};
 const tagTitle = 'гаджеты';
 
-
 // Task #1
 
+function showTagInfo(tag) {
+  getTagItemsAsync(tag.id, function (error, list) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log(`Товары по тегу #${tag.title}`);
+      list.forEach(val => {
+        console.log(`* ${val.title}: ${val.price}Q`);
+      });
+    }
+  });
+}
 
-
-
-
-
+tags.forEach(showTagInfo);
+showTagInfo(badTag);
 
 
 
