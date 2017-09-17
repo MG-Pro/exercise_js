@@ -102,10 +102,9 @@ function convertCurrency(amount, ...arg) {
   arg.forEach(function (val) {
     promises.push(getCurrencyRate(val));
   });
-  return Promise.all(promises)
-    .then((promises) => {
-      return Math.round(amount * promises[1] / promises[0]);
-    });
+  return Promise.all(promises).then((promises) => {
+    return Math.round(amount * promises[1] / promises[0]);
+  });
 }
 
 const amount = 42;
@@ -116,6 +115,8 @@ convertCurrency(amount, 'ZZZ', 'USD')
 convertCurrency(amount, 'XXX', 'USD')
   .then(result => console.log(`${amount}X = $${result}`))
   .catch(err => console.error(err));
+
+// Task 3
 
 
 
