@@ -151,15 +151,11 @@ getTagItemsCountAsync(tagTitle, (err, count) => {
 // Task #4
 
 function getTagItemsCount(title) {
-  getTag(title)
+  return getTag(title)
     .then(tag => {
-      let res = getTagItems(tag.id);
-      console.log(res);
-
-
-    })
-    .catch(err => {
-      console.log(err);
+      return getTagItems(tag.id);
+    }).then(list => {
+      return list.length;
     });
 }
 
@@ -170,7 +166,10 @@ getTagItemsCount(tagTitle)
 
 
 
-
+function show() {
+  console.log(42);
+}
+setTimeout(show(), 5000);
 
 
 
