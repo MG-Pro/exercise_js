@@ -14,3 +14,18 @@ for(var i = 1; i <= 100; i++) {
     console.log('Buzz');
   else console.log(i)
 }
+
+// Task #3 Шахматная доска
+var size = 8;
+var row = '';
+
+for (var i = 0, j = 0; i < size; i++) {
+  for (var j = 0; j < size; j++) {
+    if ((i + j) % 2 === 0)
+     row += '_';
+    else
+     row += '#';
+  }
+  console.log(row);
+  row = '';
+}
