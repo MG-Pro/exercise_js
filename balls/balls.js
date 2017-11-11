@@ -1,9 +1,10 @@
 'use strict';
 
-function Ball(color, size = 20, posX = 0, posY = 0) {
+function Ball(color, size = 50, posX = 0, posY = 0) {
   let sizePx = size + 'px';
   this.posX = posX + 'px';
   this.posY = posY + 'px';
+  this.size = size;
   let self = this;
   let posCount = 0;
   let revers = 1;
@@ -26,8 +27,8 @@ function Ball(color, size = 20, posX = 0, posY = 0) {
       angle = angle * Math.PI / 180;
       this.angle = angle;
     }
-    let posXend = window.innerWidth - size;
-    let posYend = window.innerHeight - size;
+    let posXend = window.innerWidth - this.size;
+    let posYend = window.innerHeight - this.size;
 
 
     let id = setInterval(function () {
@@ -71,7 +72,7 @@ function Ball(color, size = 20, posX = 0, posY = 0) {
 
 }
 
-let item = new Ball('green');
+let item = new Ball('red');
 item.move(10);
 
 //let item2 = new Ball(30, 0, 0, 'red');
