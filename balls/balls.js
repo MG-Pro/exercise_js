@@ -1,4 +1,11 @@
 'use strict';
+const balls = [];
+const plane = document.querySelector('.plane');
+const stop = document.querySelector('.stop');
+const add = document.querySelector('.add');
+const clear = document.querySelector('.clear');
+const infoCont = document.querySelector('.info');
+const counter = document.querySelector('.counter');
 
 class Ball {
   constructor(color, size = 50, posX = 0, posY = 0) {
@@ -18,25 +25,23 @@ class Ball {
     this.ball.addEventListener('click', e => {
       this.remove(e);
     });
-
-    document.body.appendChild(this.ball);
+    plane.appendChild(this.ball);
   }
 
   remove(e) {
-    document.body.removeChild(e.target);
-    document.querySelector('.counter').textContent--;
+    plane.removeChild(e.target);
+    counter.textContent--;
     clearInterval(this.id);
-    document.querySelector('.info').removeChild(document.querySelector('.info #' + this.ball.id));
+    infoCont.removeChild(infoCont.querySelector('#' + this.ball.id));
   }
+
   move(speed = 2, angle = 10) {
     let posXEnd = window.innerWidth - this.size - 5;
     let posYEnd = window.innerHeight - this.size - 5;
     let dx = speed;
     let dy = speed;
     angle = angle * Math.PI / 180;
-
     this.id = setInterval(animate, 15, this);
-    const infoCont = document.querySelector('.info');
 
     function animate(self) {
       if (self.posX > posXEnd || self.posX < 0) {
@@ -60,18 +65,6 @@ class Ball {
       infoCont.querySelector(`#${self.ball.id}`)
         .textContent = `ID: ${self.ball.id}; color: ${self.color}; x: ${Math.round(self.posX)}; y: ${Math.round(self.posY)}`;
     }
-
-    document.querySelector('.stop').addEventListener('click', () => {
-      this.stop();
-    });
-    document.querySelector('.clear').addEventListener('click', () => {
-      this.stop();
-      for (let item of document.querySelectorAll('.ball')) {
-        document.body.removeChild(item);
-        infoCont.removeChild(infoCont.querySelector('.info-item'));
-      }
-      document.querySelector('.counter').textContent = 0;
-    });
   }
 
   stop() {
@@ -79,12 +72,32 @@ class Ball {
   }
 }
 
-document.querySelector('.add').addEventListener('click', () => {
+add.addEventListener('click', () => {
   const options = new randBallOptions();
   let item = new Ball(options.color, options.size);
+  balls.push(item);
   item.move(options.speed, options.angle);
-  document.querySelector('.counter').textContent++;
+  counter.textContent++;
 });
+
+stop.addEventListener('click', () => {
+  stopAll(balls)
+});
+
+clear.addEventListener('click', () => {
+  stopAll(balls, true)
+});
+
+function stopAll(list, clear) {
+  list.forEach(item => {
+    item.stop();
+    if (clear) {
+      plane.removeChild(item.ball);
+      infoCont.removeChild(infoCont.querySelector('.info-item'));
+      counter.textContent--;
+    }
+  });
+}
 
 function randBallOptions() {
   let colors = ['red', 'green', 'blue', 'black', 'fuchsia', 'purple', 'grey', 'firebrick', 'yellow', 'skyblue', 'khaki', 'brown', 'aqua', 'coral'];
